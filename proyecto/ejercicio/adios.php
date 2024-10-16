@@ -11,8 +11,6 @@
 
 <?php
 
-echo "Hola, mundo";
-
 echo "chao, chao";
 ?>
 </body>
