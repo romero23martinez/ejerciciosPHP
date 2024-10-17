@@ -12,6 +12,7 @@
 <?php
 
 echo "chao, chao";
+echo "bacalao";
 ?>
 </body>
 </html>
