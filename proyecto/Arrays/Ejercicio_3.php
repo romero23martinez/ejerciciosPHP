@@ -11,5 +11,7 @@ foreach($animales as $x) {
     echo "$x  ";
 }
 
+#print_r($animales);
+
 
 ?>

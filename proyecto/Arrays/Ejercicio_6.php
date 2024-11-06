@@ -2,7 +2,7 @@
 /*Recorrer un array asociativo: Crea un array asociativo con los nombres y edades de 5 personas. Escribe un script que 
 recorra el array y muestre cada nombre y su edad en una línea nueva.
 */
-
+/*
 $personas = array(
         array("nombre" => "Alberto", "edad" => 24),
         array("nombre" => "Pepa", "edad" => 30),
@@ -15,6 +15,22 @@ foreach($personas as $x){
 
     echo $x["nombre"] ."  " . $x["edad"] . "  |";
 };
+*/
+$personas = [
+    "Juan" => 25,
+    "María" => 30,
+    "Pedro" => 20,
+    "Lucía" => 35,
+    "Ana" => 28
+];
+
+foreach ($personas as $nombre => $edad) {
+    echo "$nombre tiene $edad años   |  ";
+}
+
+
+
+
 
 
 ?>
