@@ -3,7 +3,7 @@
  si el número es primo o no.
 */
 
-$n1 = 16;
+$n1 = 450;
 $c = 0;
 echo "Divisores de $n1: ";
 
