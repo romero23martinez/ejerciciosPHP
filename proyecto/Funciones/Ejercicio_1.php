@@ -13,7 +13,7 @@ function primo($n) {
         
         }
 
-return true;
+
 
     
 }
