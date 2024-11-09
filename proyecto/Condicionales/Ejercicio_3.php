@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio_3</title>
+</head>
+<body>
+
 <?php
 /*
 Crea un programa en php con tres variables aleatorias $n1,$n2,$n3. 
@@ -8,8 +17,8 @@ $n1 = rand(0,100);
 $n2 = rand(0,100);
 $n3 = rand(0,100);
 
-echo " n1 = $n1, n2 = $n2, n3 = $n3 ";
-echo "    ";
+echo " Los números son: n1 = $n1, n2 = $n2, n3 = $n3 <br>";
+echo " En orden descendente <br>";
 
 /*
 $n = array($n1, $n2, $n3);
@@ -42,3 +51,6 @@ if ($n1 < $n2 && $n2 < $n3){
 */
 
 ?>
+
+</body>
+</html>

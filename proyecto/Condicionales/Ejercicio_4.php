@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio_4</title>
+</head>
+<body>
+
 <?php
 /*
 Crea un programa en php que genere un numero aleatorio entre 1 y 7. 
@@ -5,7 +14,7 @@ El programa debe mostrar el numero y el día de la semana siendo el lunes el dí
 */
 
 $d = rand(1, 7);
-
+echo "Dia : ";
 /*
 if ($d == 1){
     echo "$d, Lunes";
@@ -56,3 +65,6 @@ switch ($d){
     }
 
 ?>
+
+</body>
+</html>

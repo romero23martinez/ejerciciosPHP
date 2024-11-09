@@ -3,7 +3,7 @@
  si el número es primo o no.
 */
 
-$n1 = 450;
+$n1 = 1299708 ;
 $c = 0;
 echo "Divisores de $n1: ";
 
@@ -11,7 +11,7 @@ echo "Divisores de $n1: ";
 for ($i = 1; $i <= $n1; $i++) {
    
     if ($n1 % $i == 0) {
-        echo  " " . $i . " ";
+        echo  " " . $i . " " ;
         $c++;
         }
 
@@ -23,6 +23,7 @@ if ($c == 2) {
     echo " | $n1 no es primo";
 }
 
+echo " |  Total numero de divisores: $c"
 
 
 

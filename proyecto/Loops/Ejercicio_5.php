@@ -5,6 +5,7 @@ daremos valor en el código. Escribe todos los números de $n1 al
  valor a positivo.
 */
 
+/*
 $n1 = 20;
 
 for ($i = 0; $n1 != 0; $i++){
@@ -15,6 +16,38 @@ for ($i = 0; $n1 != 0; $i++){
             $a = $n1--;
 
         echo $a . " " ;
-}
     
+}
+*/
+
+/*
+$n1 = -20;
+
+for ($i = 0; $n1 != 0; $i++){
+
+        $a = $n1 < 0 ? $n1 = -$n1 : $n1;
+            $a = $n1--;
+
+        echo $a . " " ;
+        
+}
+*/
+
+
+$n1 = 20;
+
+for ($i = 0; $n1 != 0; $i++){
+
+        if ($n1 < 0) {
+            $n1 = -$n1;
+        }
+
+            $a = $n1--;
+
+
+       echo $a . " " ;
+        
+}
+echo 0;
+
 ?>

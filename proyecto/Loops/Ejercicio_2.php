@@ -1,3 +1,12 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio_2</title>
+</head>
+<body>
+
 <?php
 /*Crea un programa que simule el lanzamiento de un dado 10 veces.
 Lanzamiento debe mostrar el numero de lanzamiento, el valor del dado y la 
@@ -25,3 +34,6 @@ echo "Total lanzamientos $l, resultado final $total";
 
 
 ?>
+
+</body>
+</html>
