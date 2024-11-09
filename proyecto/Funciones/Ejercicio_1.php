@@ -4,19 +4,32 @@ es primo o no. Utiliza la función para calcular todos los primos entre uno y un
 */
 
 
-$n = rand(0,1000000);
-echo $n;
+$aleatorio = rand(0,1000000);
+//echo $aleatorio;
+
+
 function primo($n) {
 
-        for (($i % $n)== 0; $i < 1000000; $i++){
- 
+
+        $c = 0;
+        for ($i = 1; $i <= $n; $i++) {
+           
+            if ($n % $i == 0) {
+               
+                $c++;
+                }
         
         }
-
-
-
+        
+        if ($c == 2) {
+            echo "$n es primo";
+        } else {
+            echo "$n no es primo";
+        }
     
 }
 
+
+primo($aleatorio);
 
 ?>
