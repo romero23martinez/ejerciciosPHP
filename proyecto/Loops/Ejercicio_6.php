@@ -18,7 +18,7 @@ for ($i = 1; $i <= $n1; $i++) {
 
 //Version mejorada
 $n1 = 50;
- echo "Divisores de $n1: ";
+ echo "Divisores de $n1:<br>";
 
 for ($i = 1; $i <= $n1; $i++) {
    

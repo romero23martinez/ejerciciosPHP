@@ -27,10 +27,10 @@ for ($l=1; $l <= 10; $l++){
     $dado=rand(1,6);
     $total= $total + $dado;
 
-    echo "Tirada: $l resultado: $dado y total suma: $total  |  ";
+    echo "Tirada: $l resultado: $dado y total suma: $total<br>";
 }
 
-echo "Total lanzamientos $l, resultado final $total";
+echo "Total lanzamientos $l, resultado final $total<br> ";
 
 
 ?>
