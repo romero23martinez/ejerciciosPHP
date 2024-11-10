@@ -6,6 +6,12 @@
 
 function numeros(...$x){
 
+    //$cadena = implode(" ", $x);
+    //$patron="/[0-9]/";
+
+    //echo preg_match_all($patron, $cadena);
+
+
     $repeticion= array_count_values($x);
 
     $masfrecuente = array_search(max($repeticion), $repeticion);
