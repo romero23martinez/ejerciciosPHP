@@ -16,7 +16,7 @@ function numeros(...$x){
 
     $masfrecuente = array_search(max($repeticion), $repeticion);
 
-    echo $masfrecuente;
+    return $masfrecuente;
 
 }
 
