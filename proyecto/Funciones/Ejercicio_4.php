@@ -5,12 +5,11 @@
 
 
 function rectangulo($a, $l) {
-
-    
     
     $area = $l*$a;
     $perimetro = 2*($a+$l);
 
+    return ['area' => $area, 'perimetro' => $perimetro];
     $resultado = ['area' => $area, 'perimetro' => $perimetro];
     print_r($resultado);
 
