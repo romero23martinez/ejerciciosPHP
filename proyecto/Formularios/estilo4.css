@@ -1,0 +1,81 @@
+/* Estilos generales para el cuerpo de la página */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff; /* Color de fondo claro */
+    color: #333; /* Color de texto oscuro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Estilos para el contenedor del formulario */
+form {
+    background-color: #ffffff; /* Fondo blanco para el formulario */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    width: 100%;
+    max-width: 500px;
+    border: 1px solid #ddd; /* Borde suave */
+}
+
+/* Estilo para las etiquetas */
+label {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Estilo para los campos de entrada (inputs) */
+input[type="text"], input[type="radio"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 15px; /* Espacio entre los elementos */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Espaciado para los radio buttons */
+input[type="radio"] {
+    width: auto;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* Estilo para los botones */
+input[type="submit"], input[type="reset"] {
+    background-color: #007BFF; /* Color de fondo azul */
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 48%;
+    margin-top: 10px;
+}
+
+input[type="submit"]:hover, input[type="reset"]:hover {
+    background-color: #0056b3; /* Color azul oscuro al pasar el cursor */
+}
+
+/* Separar los botones */
+input[type="submit"] {
+    margin-right: 4%;
+}
+
+/* Estilo para el texto de error */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    color: #ff0000;
+}
+
+ul li {
+    margin-bottom: 10px;
+}
