@@ -1,25 +1,28 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Recoger los datos del formulario
-    $email = $_POST['email'] ?? '';
-    $nombre = $_POST['nombre'] ?? '';
-    $apellido = $_POST['apellido'] ?? '';
-    $genero = $_POST['genero'] ?? '';
+$nombre = htmlspecialchars($_POST['nombre']);
+$apellido = htmlspecialchars($_POST['apellido']);
+$email = htmlspecialchars($_POST['email']);
+$genero = $_POST['genero'] ?? null;
 
-
-    // Validar el email (expresión regular simple)
-    }elseif (!preg_match('/^[a-zA-Z0-9._%+-]+@iespabloserrano\.com$/', $email)) {
+   
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo "El campo 'E-mail' no es válido.";
     }
 
-    // Validar el nombre (solo letras y espacios)
+  
     elseif (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', $nombre)) {
         echo "El campo 'Nombre' no es válido.";
     }
 
-    // Validar el apellido (solo letras y espacios)
+ 
     elseif (!preg_match('/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/', $apellido)) {
         echo "El campo 'Apellido' no es válido.";
+    } 
+    
+    elseif (empty($genero)) {
+        echo "Debe seleccionar un género.<br>";
+        return;
     }else {
         echo "<h1>Formulario procesado correctamente</h1>";
         echo "<p>Email: $email</p>";
@@ -28,4 +31,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<p>Género: $genero</p>";
     }
 
+}
 ?>
