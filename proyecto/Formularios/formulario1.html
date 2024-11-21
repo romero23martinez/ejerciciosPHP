@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario</title>
+<link rel="stylesheet" href="estilo4.css">
+</head>
+<body>
+
+<form action="procesar1.php" method="post">
+<label for="email">E-mail:</label>
+<input type="text" id="email" name="email" ><br><br>
+<label for="nombre">Nombre:</label>
+<input type="text" id="nombre" name="nombre" ><br><br>
+<label for="apellido">Apellido:</label>
+<input type="text" id="apellido" name="apellido" ><br><br>
+
+<p>Selecciona tu género:</p>
+<input type="radio" id="masculino" name="genero" value="masculino">
+<label for="masculino">Masculino</label><br>
+<input type="radio" id="femenino" name="genero" value="femenino">
+<label for="femenino">Femenino</label><br>
+
+<input type="submit" value="Aceptar">
+<input type="reset" value="Borrar">
+</form>
+
+</body>
+</html>

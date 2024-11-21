@@ -1,0 +1,86 @@
+/* Estilo general */
+body {
+    font-family: 'Book Antiqua', Georgia; /* Una fuente gótica o misteriosa */
+    background-color: #1a1a1a; /* Fondo negro */
+    color: #e0e0e0; /* Texto claro para contraste */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* Contenedor del formulario */
+form {
+    background: linear-gradient(145deg, #2b2b2b, #1a1a1a); /* Fondo oscuro con sutil degradado */
+    border-radius: 8px;
+    padding: 20px 30px;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5); /* Resplandor rojo */
+    border: 2px solid #800000; /* Bordes rojo oscuro */
+    width: 300px;
+}
+
+/* Etiquetas de texto */
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #ff4444; /* Rojo sangre */
+    text-shadow: 2px 2px 5px #800000;
+}
+
+/* Campos de entrada */
+input[type="text"] {
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border: 1px solid #444444; /* Bordes grises oscuros */
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: #1a1a1a; /* Fondo oscuro */
+    color: #e0e0e0; /* Texto claro */
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus {
+    border-color: #ff4444; /* Rojo sangre al enfocar */
+    outline: none;
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+}
+
+/* Botones */
+input[type="submit"],
+input[type="reset"] {
+    flex: 1; /* Hacer que los botones ocupen el mismo espacio */
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+input[type="submit"] {
+    background-color: #800000; /* Rojo oscuro */
+    margin-right: 4%;
+}
+
+input[type="submit"]:hover {
+    background-color: #ff4444; /* Rojo más brillante */
+    transform: scale(1.1);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
+}
+
+input[type="reset"] {
+    background-color: #444444; /* Gris oscuro */
+}
+
+input[type="reset"]:hover {
+    background-color: #666666; /* Gris más claro */
+    transform: scale(1.1);
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.8);
+}
