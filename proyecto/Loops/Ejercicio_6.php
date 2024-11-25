@@ -1,3 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio_6</title>
+</head>
+<body>
 <?php
 /*Crea un programa con una variable $n1 a la que daremos valor en
  el código. El programa mostrará todos los divisores de ese número.
@@ -43,3 +51,5 @@ for($contador=abs($n1);$contador>=1;$contador--){
     */
     
 ?>
+</body>
+</html>
