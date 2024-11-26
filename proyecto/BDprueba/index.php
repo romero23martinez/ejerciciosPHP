@@ -10,31 +10,11 @@ $result = $conn->query("SELECT * FROM usuarios");
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="estilo.css">
 </head>
+
 <body>
-    <h1>Gestión de Usuarios</h1>
-
-    <!-- Tabla de Usuarios -->
-    <h2>Usuarios</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php while ($row = $result->fetch_assoc()): ?>
-                <tr>
-                    <td><?= $row['id'] ?></td>
-                    <td><?= $row['nombre'] ?></td>
-                    <td><?= $row['email'] ?></td>
-                </tr>
-            <?php endwhile; ?>
-        </tbody>
-    </table>
-
+    
     <!-- Formulario Crear Usuario -->
     <h2>Crear Usuario</h2>
     <form action="procesar.php" method="POST">
@@ -67,5 +47,29 @@ $result = $conn->query("SELECT * FROM usuarios");
         <input type="number" name="id" id="id_eliminar" required>
         <button type="submit">Eliminar</button>
     </form>
+
+    <h1>Gestión de Usuarios</h1>
+
+<!-- Tabla de Usuarios -->
+<h2>Usuarios</h2>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php while ($row = $result->fetch_assoc()): ?>
+            <tr>
+                <td><?= $row['id'] ?></td>
+                <td><?= $row['nombre'] ?></td>
+                <td><?= $row['email'] ?></td>
+            </tr>
+        <?php endwhile; ?>
+    </tbody>
+</table>
+
 </body>
 </html>

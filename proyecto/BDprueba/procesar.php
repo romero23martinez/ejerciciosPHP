@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email) VALUES (?, ?)");
                 $stmt->bind_param("ss", $nombre, $email);
                 $stmt->execute();
-                echo "Usuario creado exitosamente.";
+                header("Location: index.php?mensaje=Usuario creado exitosamente");
                 break;
 
             case 'modificar':
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt = $conn->prepare("UPDATE usuarios SET nombre = ?, email = ? WHERE id = ?");
                 $stmt->bind_param("ssi", $nombre, $email, $id);
                 $stmt->execute();
-                echo "Usuario modificado exitosamente.";
+                header("Location: index.php?mensaje=Usuario modificado exitosamente");
                 break;
 
             case 'eliminar':
@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $stmt = $conn->prepare("DELETE FROM usuarios WHERE id = ?");
                 $stmt->bind_param("i", $id);
                 $stmt->execute();
-                echo "Usuario eliminado exitosamente.";
+                header("Location: index.php?mensaje=Usuario eliminado exitosamente");
                 break;
 
             default:
