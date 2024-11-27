@@ -9,9 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         switch ($accion) {
             case 'crear':
                 $nombre = htmlspecialchars($_POST['nombre']);
+                $apellido = htmlspecialchars($_POST['apellido']);
                 $email = htmlspecialchars($_POST['email']);
-                $stmt = $conn->prepare("INSERT INTO usuarios (nombre, email) VALUES (?, ?)");
-                $stmt->bind_param("ss", $nombre, $email);
+                $stmt = $conn->prepare("INSERT INTO usuarios (nombre, apellido, email) VALUES (?, ?,?)");
+                $stmt->bind_param("sss", $nombre, $apellido, $email);
                 $stmt->execute();
                 header("Location: index.php?mensaje=Usuario creado exitosamente");
                 break;

@@ -1,7 +1,7 @@
 <?php
 include 'conectar.php';
 
-// Obtener usuarios
+
 $result = $conn->query("SELECT * FROM usuarios");
 ?>
 
@@ -15,18 +15,20 @@ $result = $conn->query("SELECT * FROM usuarios");
 
 <body>
     
-    <!-- Formulario Crear Usuario -->
+   
     <h2>Crear Usuario</h2>
     <form action="procesar.php" method="POST">
         <input type="hidden" name="accion" value="crear">
         <label for="nombre">Nombre:</label>
         <input type="text" name="nombre" id="nombre" required>
+        <label for="apellido">Apellido:</label>
+        <input type="text" name="apellido" id="apellido" required>
         <label for="email">Email:</label>
         <input type="email" name="email" id="email" required>
         <button type="submit">Crear</button>
     </form>
 
-    <!-- Formulario Modificar Usuario -->
+   
     <h2>Modificar Usuario</h2>
     <form action="procesar.php" method="POST">
         <input type="hidden" name="accion" value="modificar">
@@ -39,7 +41,7 @@ $result = $conn->query("SELECT * FROM usuarios");
         <button type="submit">Modificar</button>
     </form>
 
-    <!-- Formulario Eliminar Usuario -->
+   
     <h2>Eliminar Usuario</h2>
     <form action="procesar.php" method="POST">
         <input type="hidden" name="accion" value="eliminar">
@@ -50,13 +52,14 @@ $result = $conn->query("SELECT * FROM usuarios");
 
     <h1>Gestión de Usuarios</h1>
 
-<!-- Tabla de Usuarios -->
+
 <h2>Usuarios</h2>
 <table border="1">
     <thead>
         <tr>
             <th>ID</th>
             <th>Nombre</th>
+            <th>Apellido</th>
             <th>Email</th>
         </tr>
     </thead>
@@ -65,6 +68,7 @@ $result = $conn->query("SELECT * FROM usuarios");
             <tr>
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['nombre'] ?></td>
+                <td><?= $row['apellido'] ?></td>
                 <td><?= $row['email'] ?></td>
             </tr>
         <?php endwhile; ?>
