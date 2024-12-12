@@ -3,8 +3,6 @@ session_start();
 
 function conectar($username, $password){
 $servername = "localhost";
-$username = "phpmyadmin";
-$password = "root";
 $dbname = "dbprueba";
 
 if(!$username || $password){
