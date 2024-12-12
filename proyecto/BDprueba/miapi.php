@@ -29,10 +29,16 @@ switch($method) {
         break;
     case 'PUT':
         // Manejo de la solicitud PUT
+        $data = json_decode(file_get_contents("php://input"), true);
+        $stmt = $conn->prepare("UPDATE usuarios SET nombre=?, apellido=?, email=? WHERE id=? ");
+        $stmt->bind_param("sssi", $data['nombre'], $data['apellido'], $data['email'], $data['id']);
         echo json_encode(["message" => "PUT method called", "data" => $data]);
         break;
     case 'DELETE':
         // Manejo de la solicitud DELETE
+        $data = json_decode(file_get_contents("php://input"), true);
+        $stmt = $conn->prepare("DELETE FROM usuarios WHERE id=? ");
+        $stmt->bind_param("i", $data['id']);
         echo json_encode(["message" => "DELETE method called"]);
         break;
     default:
