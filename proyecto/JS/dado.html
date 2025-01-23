@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados de la suerte</title>
+    <script>
+        function Numero(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+
+            // Generar números aleatorios entre 1 y 6 para ambos dados
+            const numeroAleatorio1 = Math.floor(Math.random() * 6) + 1;
+            const numeroAleatorio2 = Math.floor(Math.random() * 6) + 1;
+
+            // Actualizar el contenido de los elementos HTML con los resultados
+            document.getElementById("dado1").textContent = numeroAleatorio1;
+            document.getElementById("dado2").textContent = numeroAleatorio2;
+            
+            numeroAleatorio1 = document.getElementById('imagenMostrada');
+            Imagen.src = `./dado/${numeroAleatorio1}.png`;
+           
+        }
+
+
+        
+    </script>
+</head>
+<body>
+    <h1>¡Lanza los Dados de la Suerte!</h1>
+    <form id="formularioDados" onsubmit="Numero(event)">
+        <button type="submit" >Lanzar Dados</button>
+    </form>
+    <h2 id="dado1">0</h2>
+    <h2 id="dado2">0</h2>
+
+    <img id="imagenMostrada" src="./dado/1.png" alt="Imagen">
+</body>
+</html>

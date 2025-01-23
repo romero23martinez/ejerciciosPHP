@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivina el Número</title>
+    <script>
+        // Generar un número aleatorio entre 1 y 100
+        const numeroAleatorio = Math.floor(Math.random() * 100) + 1;
+
+        function adivinarNumero(event) {
+            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
+            const numeroIngresado = document.getElementById('numero').value;
+            const numero = parseInt(numeroIngresado, 10);
+            const mensaje = document.getElementById('mensaje');
+
+            if (numero < (numeroAleatorio - 10)) {
+                mensaje.textContent = "Demasiado bajo";
+            } else if (numero > (numeroAleatorio + 10)) {
+                mensaje.textContent = "Demasiado alto";
+            }  else if ((numero >= (numeroAleatorio - 10) && numero <= (numeroAleatorio - 5)) || 
+                        (numero <= (numeroAleatorio + 10) && numero >= (numeroAleatorio + 5))){
+                mensaje.textContent = " estas cerca";
+            } 
+            else {
+                mensaje.textContent = "¡Felicidades! Adivinaste el número";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Adivina el Número</h1>
+    <form id="formularioAdivinanza" onsubmit="adivinarNumero(event)">
+        <label for="numero">Ingresa un número entre 1 y 100:</label>
+        <input type="number" id="numero" name="numero" required>
+        <button type="submit">Adivinar</button>
+    </form>
+    <p id="mensaje"></p>
+</body>
+</html>
