@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imágenes de Perros</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            cursor: pointer;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>¡Mira estos perros aleatorios!</h1>
+    <img id="dogImage" src="" alt="Imagen de perro" width="400">
+    <br>
+    <button id="cambiarPerro">Cambiar Perro</button>
+
+    <script>
+        const dogImage = document.getElementById('dogImage');
+        const cambiarPerroBtn = document.getElementById('cambiarPerro');
+
+        // Función para obtener una imagen aleatoria de perro
+        async function obtenerImagenPerro() {
+            try {
+                const respuesta = await fetch('https://dog.ceo/api/breeds/image/random');
+                const datos = await respuesta.json();
+                dogImage.src = datos.message; // Actualiza la imagen
+            } catch (error) {
+                console.error('Error al obtener la imagen:', error);
+                dogImage.src = ''; // Limpia la imagen en caso de error
+            }
+        }
+
+        // Cargar una imagen al iniciar la página
+        obtenerImagenPerro();
+
+        // Cambiar la imagen al hacer clic en el botón
+        cambiarPerroBtn.addEventListener('click', obtenerImagenPerro);
+    </script>
+</body>
+</html>

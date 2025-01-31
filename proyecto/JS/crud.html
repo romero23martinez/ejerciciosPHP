@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRUD con CRUD Crud</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>CRUD con CRUD Crud</h1>
+
+    <!-- Formulario para crear/actualizar registros -->
+    <div>
+        <input type="text" id="nombre" placeholder="Nombre">
+        <input type="number" id="edad" placeholder="Edad">
+        <button onclick="crearRegistro()">Crear</button>
+        <button onclick="eliminarRegistro()" id="eliminarRegistro">Eliminar</button>
+        <button onclick="actualizarRegistro()" id="btnActualizar">Actualizar</button>
+    </div>
+
+    <!-- Tabla para mostrar registros -->
+    <table id="tablaRegistros">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Los registros se cargarán aquí -->
+        </tbody>
+    </table>
+
+    <script>
+        // Reemplaza con tu URL de CRUD Crud
+        const API_URL = 'https://crudcrud.com/api/your-unique-id/personas';
+
+        // Función para obtener y mostrar registros
+        async function obtenerRegistros() {
+            try {
+                const respuesta = await fetch(API_URL);
+                const registros = await respuesta.json();
+                const tbody = document.querySelector('#tablaRegistros tbody');
+                tbody.innerHTML = ''; // Limpiar la tabla
+
+                registros.forEach(registro => {
+                    const fila = `
+                        <tr>
+                            <td>${registro._id}</td>
+                            <td>${registro.nombre}</td>
+                            <td>${registro.edad}</td>
+                            <td>
+                                <button onclick="editarRegistro('${registro._id}')">Editar</button>
+                                <button onclick="eliminarRegistro('${registro._id}')">Eliminar</button>
+                            </td>
+                        </tr>
+                    `;
+                    tbody.innerHTML += fila;
+                });
+            } catch (error) {
+                console.error('Error al obtener registros:', error);
+            }
+        }
+
+        // Función para crear un registro
+        async function crearRegistro() {
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+
+            if (!nombre || !edad) {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            try {
+                const respuesta = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nombre, edad }),
+                });
+                if (respuesta.ok) {
+                    obtenerRegistros(); // Actualizar la tabla
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('edad').value = '';
+                }
+            } catch (error) {
+                console.error('Error al crear el registro:', error);
+            }
+        }
+
+        // Función para editar un registro
+        function editarRegistro(id) {
+            const fila = document.querySelector(`tr td:first-child:contains('${id}')`).parentElement;
+            const nombre = fila.children[1].textContent;
+            const edad = fila.children[2].textContent;
+
+            document.getElementById('nombre').value = nombre;
+            document.getElementById('edad').value = edad;
+
+            document.getElementById('btnActualizar').style.display = 'inline-block';
+            document.getElementById('btnActualizar').setAttribute('data-id', id);
+        }
+
+        // Función para actualizar un registro
+        async function actualizarRegistro() {
+            const id = document.getElementById('btnActualizar').getAttribute('data-id');
+            const nombre = document.getElementById('nombre').value;
+            const edad = document.getElementById('edad').value;
+
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ nombre, edad }),
+                });
+                if (respuesta.ok) {
+                    obtenerRegistros(); // Actualizar la tabla
+                    document.getElementById('nombre').value = '';
+                    document.getElementById('edad').value = '';
+                    document.getElementById('btnActualizar').style.display = 'none';
+                }
+            } catch (error) {
+                console.error('Error al actualizar el registro:', error);
+            }
+        }
+
+        // Función para eliminar un registro
+        async function eliminarRegistro(id) {
+            try {
+                const respuesta = await fetch(`${API_URL}/${id}`, {
+                    method: 'DELETE',
+                });
+                if (respuesta.ok) {
+                    obtenerRegistros(); // Actualizar la tabla
+                }
+            } catch (error) {
+                console.error('Error al eliminar el registro:', error);
+            }
+        }
+
+        // Cargar registros al iniciar la página
+        obtenerRegistros();
+    </script>
+</body>
+</html>

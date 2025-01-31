@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Total</title>
+</head>
+<body>
+
+    <h1>Carrito de Compras</h1>
+    
+    <div>
+        <label for="producto">Producto:</label>
+        <span id="producto">Producto A</span>
+    </div>
+    
+    <div>
+        <label for="cantidad">Cantidad:</label>
+        <input type="number" id="cantidad" value="1" min="1">
+    </div>
+    
+    <div>
+        <label for="precio">Precio por unidad (€):</label>
+        <input type="number" id="precio" value="10" min="0" step="1">
+    </div>
+    
+    <div>
+        <h2>Total: <span id="total">10</span> €</h2>
+    </div>
+
+    <script>
+        // Obtener elementos del DOM
+        const cantidadInput = document.getElementById('cantidad');
+        const precioInput = document.getElementById('precio');
+        const totalSpan = document.getElementById('total');
+
+        // Función para actualizar el total
+        function actualizarTotal() {
+            const cantidad = parseFloat(cantidadInput.value);  // Obtener cantidad
+            const precio = parseFloat(precioInput.value);      // Obtener precio por unidad
+            const total = cantidad * precio;                   // Calcular total
+            totalSpan.textContent = total.toFixed(2);          // Mostrar total con 2 decimales
+        }
+
+        // Escuchar cambios en los inputs
+        cantidadInput.addEventListener('input', actualizarTotal); // Evento para cantidad
+        precioInput.addEventListener('input', actualizarTotal);   // Evento para precio
+
+        // Inicializar el total al cargar la página
+        actualizarTotal();
+    </script>
+
+</body>
+</html>
