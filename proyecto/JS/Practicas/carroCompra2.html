@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Carrito de Compras</title>
+</head>
+<body>
+
+    <h1>Carrito de Compras</h1>
+    
+    <div class="producto">
+        <label for="cantidad1">Producto 1:</label>
+        <input type="number" class="cantidad" id="cantidad1" value="1" min="1">
+        <label for="precio1">Precio (€):</label>
+        <input type="number" class="precio" id="precio1" value="10" min="0" step="1">
+        <p>Total Producto 1: <span class="total-producto" id="totalProducto1">10</span> €</p>
+    </div>
+
+    <div class="producto">
+        <label for="cantidad2">Producto 2:</label>
+        <input type="number" class="cantidad" id="cantidad2" value="1" min="1">
+        <label for="precio2">Precio (€):</label>
+        <input type="number" class="precio" id="precio2" value="20" min="0" step="1">
+        <p>Total Producto 2: <span class="total-producto" id="totalProducto2">20</span> €</p>
+    </div>
+
+    <div class="producto">
+        <label for="cantidad3">Producto 3:</label>
+        <input type="number" class="cantidad" id="cantidad3" value="1" min="1">
+        <label for="precio3">Precio (€):</label>
+        <input type="number" class="precio" id="precio3" value="20" min="0" step="1">
+        <p>Total Producto 3: <span class="total-producto" id="totalProducto3">20</span> €</p>
+    </div>
+
+    <h2>Total General: <span id="totalGeneral">30</span> €</h2>
+
+    <script>
+        // Obtener todos los elementos de cantidad y precio usando querySelectorAll
+        const cantidadInputs = document.querySelectorAll('.cantidad');
+        const precioInputs = document.querySelectorAll('.precio');
+        const totalProductoSpans = document.querySelectorAll('.total-producto');
+        const totalGeneralSpan = document.getElementById('totalGeneral');
+
+        // Función para actualizar el total de cada producto y el total general
+        function actualizarTotales() {
+            let totalGeneral = 0;  // Inicializamos el total general
+
+            // Iteramos sobre todos los productos
+            cantidadInputs.forEach((cantidadInput, index) => {
+                const cantidad = parseFloat(cantidadInput.value);  // Obtener la cantidad del producto
+                const precio = parseFloat(precioInputs[index].value); // Obtener el precio del producto
+                const totalProducto = cantidad * precio;  // Calcular el total del producto
+
+                // Mostrar el total del producto
+                totalProductoSpans[index].textContent = totalProducto.toFixed(2);
+
+                // Sumar al total general
+                totalGeneral += totalProducto;
+            });
+
+            // Actualizar el total general
+            totalGeneralSpan.textContent = totalGeneral.toFixed(3);
+        }
+
+        // Agregar un evento 'input' para cada campo de cantidad y precio
+        cantidadInputs.forEach(input => input.addEventListener('input', actualizarTotales));
+        precioInputs.forEach(input => input.addEventListener('input', actualizarTotales));
+
+        // Inicializar el total al cargar la página
+        actualizarTotales();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego Palabra Desordenada</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+        #game-container {
+            border: 2px solid black;
+            padding: 20px;
+            width: 300px;
+            margin: auto;
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+        }
+        .palabra {
+            letter-spacing: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h2>Ordena las letras</h2>
+        <p id="palabra" class="palabra">Cargando...</p>
+        <input type="text" id="guess" placeholder="Escribe tu respuesta">
+        <button id="check">Comprobar</button>
+        <p id="result"></p>
+    </div>
+    <script>
+        let secretWord = "";
+
+        function shuffleWord(word) {
+            return word.split('').sort(() => Math.random() - 0.5).join('');
+        }
+
+        async function fetchWord() {
+            try {
+                let response = await fetch("https://random-word-api.herokuapp.com/word?number=1");
+                let data = await response.json();
+                secretWord = data[0];
+                document.getElementById("palabra").textContent = shuffleWord(secretWord);
+            } catch (error) {
+                console.error("Error al obtener la palabra:", error);
+            }
+        }
+
+        document.getElementById("check").addEventListener("click", function() {
+            let guess = document.getElementById("guess").value.trim().toLowerCase();
+            let resultText = guess === secretWord ? "¡Correcto!" : `Incorrecto. La palabra era: ${secretWord}`;
+            document.getElementById("result").textContent = resultText;
+            fetchWord();
+        });
+
+        fetchWord();
+    </script>
+</body>
+</html>
