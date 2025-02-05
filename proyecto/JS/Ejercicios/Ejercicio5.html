@@ -2,34 +2,43 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Franklin Gothic Medium';
+            align-content: center;
+            text-align: center;
+            padding: 3%;
         }
+
         input, button {
             padding: 10px;
             margin: 5px;
+            
         }
+        button {
+            border: 1px solid #000000;
+            background-color: #07c4dd7c;
+
+        }
+        
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 1px solid #000000;
             padding: 8px;
-            text-align: left;
+            text-align: center;
         }
         th {
-            background-color: #f2f2f2;
+            background-color: #1ef7549c;
         }
     </style>
 </head>
 <body>
-    <h1>CRUD</h1>
+    <h1>CRUD API JS</h1>
 
     <!-- Formulario para crear/actualizar registros -->
     <div>
@@ -117,13 +126,20 @@
 
 
         function editarRegistro(id) {
-            const fila = document.querySelector(`tr td:first-child:contains('${id}')`).parentElement;
+            const filas = document.querySelectorAll("#tablaRegistros tbody tr");
+                    let fila;
+                    filas.forEach( function(f) {
+                        if (f.children[0].textContent.trim() === id) {
+                            fila = f;
+                        }
+                    });
+
             const nombre = fila.children[1].textContent;
             const email = fila.children[2].textContent;
             const edad = fila.children[3].textContent;
 
             document.getElementById('nombre').value = nombre;
-            document.getElementById('email').value = nombre;
+            document.getElementById('email').value = email;
             document.getElementById('edad').value = edad;
 
             document.getElementById('btnActualizar').style.display = 'inline-block';
@@ -152,7 +168,7 @@
                     body: JSON.stringify(usuario),
                 });
                 if (respuesta.ok) {
-                    obtenerRegistros(); // Actualizar la tabla
+                    obtenerRegistros();
                     document.getElementById('nombre').value = '';
                     document.getElementById('email').value = '';
                     document.getElementById('edad').value = '';
@@ -162,7 +178,6 @@
                 console.error('Error al actualizar el registro:', error);
             }
         }
-
 
         async function eliminarRegistro(id) {
             try {
@@ -177,7 +192,6 @@
             }
         }
 
-        // Cargar registros al iniciar la página
         obtenerRegistros();
     </script>
 </body>
