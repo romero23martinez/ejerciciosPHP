@@ -10,11 +10,30 @@
             text-align: center;
             padding: 3%;
         }
-
+        .navbar {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #16b69b81;
+            margin-bottom: 2%;
+            margin: 0 auto; 
+            padding: 0; 
+        }
+        .navbar a {
+            padding: 10px 20px; 
+            text-decoration: none;
+            color: white;
+            margin: 0 10px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+        }
+        .navbar a:hover {
+            background-color: #03887d;
+        }
         input, button {
             padding: 10px;
             margin: 5px;
-            
         }
         button {
             border: 1px solid #000000;
@@ -38,9 +57,19 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="Ejercicio7.html">Inicio</a>
+        <a href="Ejercicio1.html">Página 1</a>
+        <a href="Ejercicio2.html">Página 2</a>
+        <a href="Ejercicio3.html">Página 3</a>
+        <a href="Ejercicio4.html">Página 4</a>
+        <a href="Ejercicio4_1.html">Página 4.1</a>
+        <a href="Ejercicio5.html">Página 5</a>
+        <a href="Ejercicio6.html">Página 6</a>
+    </div>
+
     <h1>CRUD API JS</h1>
 
-    <!-- Formulario para crear/actualizar registros -->
     <div>
         <input type="text" id="nombre" placeholder="Nombre">
         <input type="text" id="email" placeholder="Email">

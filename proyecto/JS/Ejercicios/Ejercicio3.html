@@ -4,6 +4,32 @@
         <meta charset="UTF-8">
         <title>Vuelo Espacial</title>
         <style>
+             body {
+            font-family: 'Franklin Gothic Medium';
+            margin: 20px;
+        }
+            .navbar {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #16b69b81;
+            margin-bottom: 2%;
+            margin: 0 auto; 
+            padding: 0; 
+        }
+        .navbar a {
+            padding: 10px 20px; 
+            text-decoration: none;
+            color: white;
+            margin: 0 10px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+        }
+        .navbar a:hover {
+            background-color: #03887d;
+        }
+
             #shuttle-box {
                 text-align: center;
                 padding: 20px;
@@ -15,9 +41,20 @@
                 margin: 10px;
                 padding: 10px;
             }
+
         </style>
     </head>
     <body>
+        <div class="navbar">
+            <a href="Ejercicio7.html">Inicio</a>
+            <a href="Ejercicio1.html">Página 1</a>
+            <a href="Ejercicio2.html">Página 2</a>
+            <a href="Ejercicio3.html">Página 3</a>
+            <a href="Ejercicio4.html">Página 4</a>
+            <a href="Ejercicio4_1.html">Página 4.1</a>
+            <a href="Ejercicio5.html">Página 5</a>
+            <a href="Ejercicio6.html">Página 6</a>
+        </div>
         <div id="shuttle-box">
             <p id="estado">The shuttle is on the ground</p>
             <button id="takeoff">Take off</button>

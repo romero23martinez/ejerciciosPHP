@@ -4,16 +4,36 @@
     <meta charset="UTF-8">
     <title>Juego Veo Veo</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
+              body {
+            font-family: 'Franklin Gothic Medium';
+            margin: 20px;
+        }
+            .navbar {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #16b69b81;
+            margin-bottom: 2%;
+            margin: 0 auto; 
+            padding: 0; 
+        }
+        .navbar a {
+            padding: 10px 20px; 
+            text-decoration: none;
+            color: white;
+            margin: 0 10px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+        }
+        .navbar a:hover {
+            background-color: #03887d;
         }
         #game-container {
+            margin-top: 3%;
             border: 2px solid black;
             padding: 20px;
             width: 300px;
-            margin: auto;
         }
         button {
             margin: 10px;
@@ -22,6 +42,16 @@
     </style>
 </head>
 <body>
+    <div class="navbar">
+        <a href="Ejercicio7.html">Inicio</a>
+        <a href="Ejercicio1.html">Página 1</a>
+        <a href="Ejercicio2.html">Página 2</a>
+        <a href="Ejercicio3.html">Página 3</a>
+        <a href="Ejercicio4.html">Página 4</a>
+        <a href="Ejercicio4_1.html">Página 4.1</a>
+        <a href="Ejercicio5.html">Página 5</a>
+        <a href="Ejercicio6.html">Página 6</a>
+    </div>
     <div id="game-container">
         <h2>Juego Veo Veo en ingles</h2>
         <p id="texto">Veo veo... una cosita que empieza por:</p>
