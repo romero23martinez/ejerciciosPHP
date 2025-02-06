@@ -81,10 +81,10 @@
        function actualizaPrecio(){
         let suma=0;
         cantidad.forEach((cant, index) => {
-          let p = parseInt(precio[index].value);
+          let p = parseFloat(precio[index].value);
           let c = parseInt(cant.value);
-          let subtotal=p*c;
-          suma = suma + subtotal
+          let subtotal = p * c;
+          suma += subtotal;
           total[index].innerHTML = subtotal;
           
         });

@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-        .tabla{
-            
 
-        }
 
     </style>
 </head>
@@ -37,7 +34,23 @@
     <p id="sumas"></p>
 
 <script>
+    let tbody = document.getElementById("tabla");
+    let fila = document.createElement("tr");
+    let celda = document.createElement("td");
+    let textCelda = document.createTextNode(dado1);
+    let celda2 = document.createElement("td");
+    let textCelda2 = document.createTextNode(dado2);
+    let celda3 = document.createElement("td");
+    let textCelda3 = document.createTextNode(suma);
 
+    tbody.appendChild(fila);
+    fila.appendChild(celda);
+    fila.appendChild(celda2);
+    fila.appendChild(celda3);
+    celda.appendChild(textCelda);
+    celda2.appendChild(textCelda2);
+    celda3.appendChild(textCelda3);
+    
     //Funcion que lanza un dado
     function lanzarDado(){
         return(Math.floor(Math.random()*6) + 1);
@@ -50,16 +63,17 @@
         let dado2 = lanzarDado();
         let suma = dado1 + dado2;
         //Actualizo la tabla
-        let columDado1 = document.getElementById("dado1");
+       let columDado1 = document.getElementById("dado1");
         let columDado2 = document.getElementById("dado2");
         let columSuma = document.getElementById("suma");
 
         columDado1.src = obtenerNombreImagen(dado1);
         columDado2.src = obtenerNombreImagen(dado2);
         columSuma.innerHTML = suma;
+    
 
         //Subo a la API los resultados
-        await fetch("https://crudcrud.com/api/4d9ab80a8a8e454281ddbcd1286c3c13/resultados",
+        await fetch("https://crudcrud.com/api/a696459aa80f43a19f2c7114c52d13f8/personas",
         {
             method: 'POST',
             headers: {
