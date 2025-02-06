@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dado Aleatorio y Suma</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      text-align: center;
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: collapse;
+      width: auto;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+    img {
+      width: 100px; /* Ajusta el tamaño de la imagen según necesites */
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Tirar Dados y Sumar</h1>
+  
+  <!-- Tabla con tres columnas: Dado 1, Dado 2 y Resultado -->
+  <table>
+    <thead>
+      <tr>
+        <th>Dado 1</th>
+        <th>Dado 2</th>
+        <th>Resultado de la Suma</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <!-- Se inicializan con la imagen del dado 1 -->
+        <td id="dado1"><img src="../Ejercicios/dado/1.png"></td>
+        <td id="dado2"><img src="../Ejercicios/dado/1.png"></td>
+        <td id="resultado">0</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <!-- Botones para tirar los dados y sumar los valores -->
+  <button onclick="tirarDados()">Tirar Dados</button>
+  <button onclick="sumarDados()">Sumar Dados</button>
+  
+  <script>
+    // Variables globales para almacenar los valores de los dados
+    let numero1 = 0;
+    let numero2 = 0;
+    
+    // Función para generar números aleatorios y actualizar las imágenes de los dados
+    function tirarDados() {
+      // Generar números aleatorios entre 1 y 6
+      numero1 = Math.floor(Math.random() * 6) + 1;
+      numero2 = Math.floor(Math.random() * 6) + 1;
+      
+      // Actualizar las imágenes de los dados (se asume que las imágenes se llaman "dado1.png", "dado2.png", etc.)
+      document.getElementById('dado1').innerHTML = `<img src="../Ejercicios/dado/${numero1}.png">`;
+      document.getElementById('dado2').innerHTML = `<img src="../Ejercicios/dado/${numero2}.png">`;
+      
+      // Reiniciar el resultado de la suma en la tabla
+      document.getElementById('resultado').textContent = "0";
+    }
+    
+    // Función para sumar los valores de los dados y mostrar el resultado
+    function sumarDados() {
+      const suma = numero1 + numero2;
+      document.getElementById('resultado').textContent = suma;
+    }
+  </script>
+</body>
+</html>

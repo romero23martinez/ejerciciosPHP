@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ofertas de Empleo en Zaragoza</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Ofertas de Empleo en Zaragoza</h1>
+    <button onclick="cargarEmpleos()">Cargar Ofertas</button>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Puesto</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody id="tablaEmpleos">
+            <!-- Aquí se cargarán las ofertas de empleo -->
+        </tbody>
+    </table>
+
+    <script>
+        async function cargarEmpleos() {
+          
+                let respuesta = await fetch('https://www.zaragoza.es/sede/servicio/oferta-empleo?rf=json', {
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                let datos = await respuesta.json();
+                let empleos = datos.result[0];
+
+                let tabla = document.getElementById("tablaEmpleos");
+                tabla.innerHTML = "";
+
+                empleos.items.forEach(empleo => {
+                    let fila = `
+                        <tr>
+                            <td>${empleo.title}</td>
+                            <td>${empleo.id}</td>
+                        </tr>
+                    `;
+                    tabla.innerHTML += fila;
+                });
+        }
+    </script>
+
+</body>
+</html>
