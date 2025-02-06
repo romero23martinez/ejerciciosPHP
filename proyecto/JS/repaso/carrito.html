@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carro de compra</title>
+</head>
+<body>
+    
+    <h1>Carrito de Compras</h1>
+
+    <div class="container">
+        <table class="table mx-auto">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Producto</th>
+                    <th class="text-center" scope="col">Nombre</th>
+                    <th class="text-center" scope="col">Cantidad</th>
+                    <th class="text-center" scope="col">Precio</th>
+                    <th class="text-center" scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Producto uno</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio" value="72"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Producto dos</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio"value="125"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Producto tres</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio"value="250"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Producto cuatro</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="text-end"value="300"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5" class="text-end" id="precioTotal">Total = 0€</th>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+
+    <script>
+       
+        const precio = document.querySelectorAll('.precio');
+        const cantidad = document.querySelectorAll('.input-mini.text-center');
+        const total = document.querySelectorAll('.text-end');
+        const precioTotal = document.getElementById('precioTotal');
+
+       function actualizaPrecio(){
+        let suma=0;
+        cantidad.forEach((cant, index) => {
+          let p = parseInt(precio[index].value);
+          let c = parseInt(cant.value);
+          let subtotal=p*c;
+          suma = suma + subtotal
+          total[index].innerHTML = subtotal;
+          
+        });
+        precioTotal.textContent = suma;
+    };
+
+
+        cantidad.forEach(cant => {
+            cant.addEventListener('change', actualizaPrecio);
+        });
+        precio.forEach(precio => {
+            precio.addEventListener('change', actualizaPrecio);
+        });
+        actualizaPrecio();
+    </script>
+    
+</body>
+</html>
