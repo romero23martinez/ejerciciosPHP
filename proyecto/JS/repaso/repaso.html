@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .tabla{
+            
+
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Lanzamiento Dado</h1>
+    <button onclick="lanzarActualizar()" >Lanzar</button>
+    <button onclick="verResultados()">Resultado</button>
+    <button onclick="borrar()">Borrar</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Dado 1</th>
+                <th>Dado 2</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody id="tabla">
+            <tr>
+                <td><img id="dado1" src="./img/1.png"></td>
+                <td><img id="dado2"src="./img/2.png"></td>
+                <td id="suma">3</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Todas las sumas:</p>
+    <p id="sumas"></p>
+
+<script>
+
+    //Funcion que lanza un dado
+    function lanzarDado(){
+        return(Math.floor(Math.random()*6) + 1);
+    }
+    //Funcion que lanza dos dados y actualiza la tabla
+    //Tambien llama a la API
+    async function lanzarActualizar(){
+        //Calculo los valores
+        let dado1 = lanzarDado();
+        let dado2 = lanzarDado();
+        let suma = dado1 + dado2;
+        //Actualizo la tabla
+        let columDado1 = document.getElementById("dado1");
+        let columDado2 = document.getElementById("dado2");
+        let columSuma = document.getElementById("suma");
+
+        columDado1.src = obtenerNombreImagen(dado1);
+        columDado2.src = obtenerNombreImagen(dado2);
+        columSuma.innerHTML = suma;
+
+        //Subo a la API los resultados
+        await fetch("https://crudcrud.com/api/4d9ab80a8a8e454281ddbcd1286c3c13/resultados",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                dado1: dado1,
+                dado2: dado2,
+                suma: suma
+            })
+        });
+    }
+
+    function obtenerNombreImagen(valor){
+        return "./img/" + valor + ".png";
+    }
+
+
+    async function verResultados() {
+        console.log("inicio de la  peticion");
+        let respuesta = await fetch("https://crudcrud.com/api/4d9ab80a8a8e454281ddbcd1286c3c13/resultados");
+        let datos = await respuesta.json();
+        console.log("Datos obtenidos", datos);
+        
+        let texto = "";
+        datos.forEach(element => {
+            texto = texto + element.suma + ", ";
+        });
+        document.getElementById("sumas").innerHTML = texto;
+    }
+    
+</script>
+
+</body>
+</html>
