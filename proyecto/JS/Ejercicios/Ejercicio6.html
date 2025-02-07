@@ -1,112 +1,113 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculadora de Carrito de Compras</title>
-    <style>
-        body {
-       font-family: 'Franklin Gothic Medium';
-       margin: 20px;
-   }
-               .navbar {
-       display: inline-flex;
-       justify-content: center;
-       align-items: center;
-       background-color: #16b69b81;
-       margin-bottom: 2%;
-       margin: 0 auto; 
-       padding: 0; 
-   }
-   .navbar a {
-       padding: 10px 20px; 
-       text-decoration: none;
-       color: white;
-       margin: 0 10px; 
-       border-radius: 5px; 
-       font-size: 16px; 
-       transition: background-color 0.3s; 
-   }
-   .navbar a:hover {
-       background-color: #03887d;
-   }
-   </style>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
 </head>
+
 <body>
-    <div class="navbar">
-        <a href="Ejercicio7.html">Inicio</a>
-        <a href="Ejercicio1.html">Página 1</a>
-        <a href="Ejercicio2.html">Página 2</a>
-        <a href="Ejercicio3.html">Página 3</a>
-        <a href="Ejercicio4.html">Página 4</a>
-        <a href="Ejercicio4_1.html">Página 4.1</a>
-        <a href="Ejercicio5.html">Página 5</a>
-        <a href="Ejercicio6.html">Página 6</a>
-    </div>
+    <h1 class="text-center">Carrito de la compra</h1>
 
-    <h1>Carrito de Compras</h1>
+    <div class="container">
+        <table class="table mx-auto">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">Producto</th>
+                    <th class="text-center" scope="col">Nombre</th>
+                    <th class="text-center" scope="col">Cantidad</th>
+                    <th class="text-center" scope="col">Precio</th>
+                    <th class="text-center" scope="col">Subtotal</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Producto uno</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio" value="72"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Producto dos</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio" value="125"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Producto tres</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="precio" value="250"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Producto cuatro</td>
+                    <td>
+                        <button class="btn btn-outline-dark">+</button>
+                        <input type="number" class="input-mini text-center" value="0">
+                        <button class="btn btn-outline-dark">-</button></td>
+                    <td><input type="number" class="text-end" value="300"></td>
+                    <td class="text-end">0 €</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="5" class="text-end" id="precioTotal">Total = 0€</th>
+                </tr>
+            </tfoot>
+
+        </table>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous">
     
-    <div class="producto">
-        <label for="cantidad1">Producto 1:</label>
-        <input type="number" class="cantidad" id="cantidad1" value="1" min="1">
-        <label for="precio1">Precio (€):</label>
-        <input type="number" class="precio" id="precio1" value="10" min="0" step="1">
-        <p>Total Producto 1: <span class="total-producto" id="totalProducto1">10</span> €</p>
-    </div>
+    const precio = document.querySelectorAll('.precio');
+        const cantidad = document.querySelectorAll('.input-mini.text-center');
+        const total = document.querySelectorAll('.text-end');
+        const precioTotal = document.getElementById('precioTotal');
 
-    <div class="producto">
-        <label for="cantidad2">Producto 2:</label>
-        <input type="number" class="cantidad" id="cantidad2" value="1" min="1">
-        <label for="precio2">Precio (€):</label>
-        <input type="number" class="precio" id="precio2" value="20" min="0" step="1">
-        <p>Total Producto 2: <span class="total-producto" id="totalProducto2">20</span> €</p>
-    </div>
+       function actualizaPrecio(){
+        let suma = 0;
+        cantidad.forEach((cant, index) => {
+          let p = parseFloat(precio[index].value);
+          let c = parseInt(cant.value);
+          let subtotal = p * c;
+          suma += subtotal;
+          total[index].innerHTML = subtotal;
+          
+        });
+        precioTotal.textContent = suma;
+    };
 
-    <div class="producto">
-        <label for="cantidad3">Producto 3:</label>
-        <input type="number" class="cantidad" id="cantidad3" value="1" min="1">
-        <label for="precio3">Precio (€):</label>
-        <input type="number" class="precio" id="precio3" value="20" min="0" step="1">
-        <p>Total Producto 3: <span class="total-producto" id="totalProducto3">20</span> €</p>
-    </div>
 
-    <h2>Total General: <span id="totalGeneral">30</span> €</h2>
-
-    <script>
-        // Obtener todos los elementos de cantidad y precio usando querySelectorAll
-        const cantidadInputs = document.querySelectorAll('.cantidad');
-        const precioInputs = document.querySelectorAll('.precio');
-        const totalProductoSpans = document.querySelectorAll('.total-producto');
-        const totalGeneralSpan = document.getElementById('totalGeneral');
-
-        // Función para actualizar el total de cada producto y el total general
-        function actualizarTotales() {
-            let totalGeneral = 0;  // Inicializamos el total general
-
-            // Iteramos sobre todos los productos
-            cantidadInputs.forEach((cantidadInput, index) => {
-                const cantidad = parseFloat(cantidadInput.value);  // Obtener la cantidad del producto
-                const precio = parseFloat(precioInputs[index].value); // Obtener el precio del producto
-                const totalProducto = cantidad * precio;  // Calcular el total del producto
-
-                // Mostrar el total del producto
-                totalProductoSpans[index].textContent = totalProducto.toFixed(2);
-
-                // Sumar al total general
-                totalGeneral += totalProducto;
-            });
-
-            // Actualizar el total general
-            totalGeneralSpan.textContent = totalGeneral.toFixed(3);
-        }
-
-        // Agregar un evento 'input' para cada campo de cantidad y precio
-        cantidadInputs.forEach(input => input.addEventListener('input', actualizarTotales));
-        precioInputs.forEach(input => input.addEventListener('input', actualizarTotales));
-
-        // Inicializar el total al cargar la página
-        actualizarTotales();
+        cantidad.forEach(cant => {
+            cant.addEventListener('change', actualizaPrecio);
+        });
+        precio.forEach(precio => {
+            precio.addEventListener('change', actualizaPrecio);
+        });
+        actualizaPrecio();
+    
     </script>
-
 </body>
 </html>

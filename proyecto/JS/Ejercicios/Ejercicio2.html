@@ -1,38 +1,178 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dados de la suerte</title>
-    <script>
-        function Numero(event) {
-            event.preventDefault(); // Evitar que el formulario se envíe automáticamente
-
-            // Generar números aleatorios entre 1 y 6 para ambos dados
-            const numeroAleatorio1 = Math.floor(Math.random() * 6) + 1;
-            const numeroAleatorio2 = Math.floor(Math.random() * 6) + 1;
-
-            // Actualizar el contenido de los elementos HTML con los resultados
-            document.getElementById("dado1").textContent = numeroAleatorio1;
-            document.getElementById("dado2").textContent = numeroAleatorio2;
-            
-            numeroAleatorio1 = document.getElementById('imagenMostrada');
-            Imagen.src = `./dado/${numeroAleatorio1}.png`;
-           
+    <title>Dados</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 20px;
+          text-align: center;
         }
-
-
-        
-    </script>
+        .navbar {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #16b69b81;
+            margin-bottom: 2%;
+            margin: 0 auto; 
+            padding: 0; 
+        }
+        .navbar a {
+            padding: 10px 20px; 
+            text-decoration: none;
+            color: white;
+            margin: 0 10px; 
+            border-radius: 5px; 
+            font-size: 16px; 
+            transition: background-color 0.3s; 
+        }
+        .navbar a:hover {
+            background-color: #03887d;
+        }
+        table {
+          margin: 0 auto;
+          border-collapse: collapse;
+          width: auto;
+        }
+        th, td {
+          border: 1px solid #ccc;
+          padding: 10px;
+          text-align: center;
+        }
+        img {
+          width: 100px; /* Ajusta el tamaño de la imagen según necesites */
+        }
+        button {
+          margin: 10px;
+          padding: 10px 20px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+      </style>
 </head>
 <body>
-    <h1>¡Lanza los Dados de la Suerte!</h1>
-    <form id="formularioDados" onsubmit="Numero(event)">
-        <button type="submit" >Lanzar Dados</button>
-    </form>
-    <h2 id="dado1">0</h2>
-    <h2 id="dado2">0</h2>
+    <div class="navbar">
+        <a href="Ejercicio7.html">Inicio</a>
+        <a href="Ejercicio1.html">Página 1</a>
+        <a href="Ejercicio2.html">Página 2</a>
+        <a href="Ejercicio3.html">Página 3</a>
+        <a href="Ejercicio4.html">Página 4</a>
+        <a href="Ejercicio4_1.html">Página 4.1</a>
+        <a href="Ejercicio5.html">Página 5</a>
+        <a href="Ejercicio6.html">Página 6</a>
+    </div>
+    
+    <h1>Lanzamiento Dado</h1>
+    <button onclick="lanzarActualizar()">Lanzar</button>
+    <button onclick="verResultados()">Resultado</button>
+    <button onclick="borrar()">Borrar</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Dado 1</th>
+                <th>Dado 2</th>
+                <th>Suma</th>
+            </tr>
+        </thead>
+        <tbody id="tabla">
+            <tr>
+                <td><img id="dado1" src="./dado/1.png"></td>
+                <td><img id="dado2"src="./dado/2.png"></td>
+                <td id="suma">3</td>
+            </tr>
+        </tbody>
+    </table>
+    <p>Todas las sumas:</p>
+    <p id="sumas"></p>
 
-    <img id="imagenMostrada" src="./dado/1.png" alt="Imagen">
+<script>
+    
+    //Funcion que lanza un dado
+    function lanzarDado(){
+        return(Math.floor(Math.random()*6) + 1);
+    }
+    //Funcion que lanza dos dados y actualiza la tabla
+    //Tambien llama a la API
+    async function lanzarActualizar(){
+        //Calculo los valores
+        let dado1 = lanzarDado();
+        let dado2 = lanzarDado();
+        let suma = dado1 + dado2;
+        //Actualizo la tabla
+        let columDado1 = document.getElementById("dado1");
+        let columDado2 = document.getElementById("dado2");
+        let columSuma = document.getElementById("suma");
+
+        columDado1.src = obtenerNombreImagen(dado1);
+        columDado2.src = obtenerNombreImagen(dado2);
+        columSuma.innerHTML = suma;
+
+
+        let tbody = document.getElementById("tabla");
+        let fila = document.createElement("tr");
+
+        let celda1 = document.createElement("td");
+        let textCelda1 = document.createTextNode(dado1);
+        let celda2 = document.createElement("td");
+        let textCelda2 = document.createTextNode(dado2);
+        let celda3 = document.createElement("td");
+        let textCelda3 = document.createTextNode(suma);
+
+        tbody.appendChild(fila);
+        fila.appendChild(celda1);
+        fila.appendChild(celda2);
+        fila.appendChild(celda3);
+        celda1.appendChild(textCelda1);
+        celda2.appendChild(textCelda2);
+        celda3.appendChild(textCelda3);
+
+        //Subo a la API los resultados
+        await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados",
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                dado1: dado1,
+                dado2: dado2,
+                suma: suma
+            })
+        });
+    }
+
+    function obtenerNombreImagen(valor){
+        return "./dado/" + valor + ".png";
+    }
+
+
+    async function verResultados() {
+        console.log("inicio de la  peticion");
+        let respuesta = await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados");
+        let datos = await respuesta.json();
+        console.log("Datos obtenidos", datos);
+        
+        let texto = "";
+        datos.forEach(element => {
+            texto = texto + element.suma + ", ";
+        });
+        document.getElementById("sumas").innerHTML = texto;
+    }
+    
+    async function borrar(){
+        let respuestaBorrar = await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados");
+        let datosBorrar = await respuestaBorrar.json();
+
+        for (let elemento of datosBorrar) {
+            await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados/" + elemento._id,
+            {method: 'DELETE'});
+        }
+        verResultados();
+}
+
+</script>
+
 </body>
 </html>
