@@ -40,7 +40,7 @@
             margin: 10px;
             padding: 10px;
         }
-        .palabra {
+        #palabra {
             letter-spacing: 5px;
         }
     </style>
@@ -58,37 +58,37 @@
     </div>
     <div id="game-container">
         <h2>Ordena las letras</h2>
-        <p id="palabra" class="palabra">Cargando...</p>
+        <p id="palabra">Cargando...</p>
         <input type="text" id="guess" placeholder="Escribe tu respuesta">
-        <button id="check">Comprobar</button>
-        <p id="result"></p>
+        <button id="comprobar">Comprobar</button>
+        <p id="resultado"></p>
     </div>
     <script>
-        let secretWord = "";
+        let palabra = "";
 
-        function shuffleWord(word) {
-            return word.split('').sort(() => Math.random() - 0.5).join('');
-        }
-
-        async function fetchWord() {
+        async function obtenerPalabra() {
             try {
-                let response = await fetch("https://random-word-api.herokuapp.com/word?number=1");
-                let data = await response.json();
-                secretWord = data[0];
-                document.getElementById("palabra").textContent = shuffleWord(secretWord);
+                let respuesta = await fetch("https://random-word-api.herokuapp.com/word?number=1");
+                let data = await respuesta.json();
+                palabra = data[0];
+                document.getElementById("palabra").textContent = mezclar(palabra);
             } catch (error) {
                 console.error("Error al obtener la palabra:", error);
             }
         }
 
-        document.getElementById("check").addEventListener("click", function() {
+        function mezclar(palabra) {
+            return palabra.split('').sort(() => Math.random() - 0.5).join('');
+        }
+
+        document.getElementById("comprobar").addEventListener("click", function() {
             let guess = document.getElementById("guess").value.trim().toLowerCase();
-            let resultText = guess === secretWord ? "¡Correcto!" : `Incorrecto. La palabra era: ${secretWord}`;
-            document.getElementById("result").textContent = resultText;
-            fetchWord();
+            let resultadoTexto = guess === palabra ? "¡Correcto!" : "Incorrecto. La palabra era: " + palabra;
+            document.getElementById("resultado").textContent = resultadoTexto;
+            obtenerPalabra();
         });
 
-        fetchWord();
+        obtenerPalabra();
     </script>
 </body>
 </html>

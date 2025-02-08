@@ -54,35 +54,38 @@
     </div>
     <div id="game-container">
         <h2>Juego Veo Veo en ingles</h2>
-        <p id="texto">Veo veo... una cosita que empieza por:</p>
-        <p id="pista">y acaba por</p>
-        <input type="text" id="guess" placeholder="Escribe tu respuesta">
-        <button id="check">Comprobar</button>
-        <p id="result"></p>
+        <p id="texto"></p>
+        <p id="pista"></p>
+        <p id="letras"></p>
+        <input type="text" id="adivina" placeholder="Escribe tu respuesta">
+        <button id="comprobar">Comprobar</button>
+        <p id="resultado"></p>
     </div>
     <script>
         let palabra = "";
 
-        async function fetchWord() {
+        async function palabraRandom() {
             try {
-                let response = await fetch("https://random-word-api.herokuapp.com/word?number=1");
-                let data = await response.json();
+                let respuesta = await fetch("https://random-word-api.herokuapp.com/word?number=1");
+                let data = await respuesta.json();
+                //console.log(data);
                 palabra = data[0];
-                document.getElementById("texto").textContent = `Veo veo... una cosita que empieza por: ${palabra.charAt(0).toUpperCase()}`;
-                document.getElementById("pista").textContent = `y acaba por: ${palabra.slice(-1).toUpperCase()}`;
+                document.getElementById("texto").textContent = "Veo veo... una cosita que empieza por: " + palabra.charAt(0).toUpperCase();
+                document.getElementById("pista").textContent = "Y acaba por: " + palabra.slice(-1).toUpperCase();
+                document.getElementById("letras").textContent = "Número de letras: " + palabra.length;
             } catch (error) {
                 console.error("Error al obtener la palabra:", error);
             }
         }
 
-        document.getElementById("check").addEventListener("click", function() {
-            let guess = document.getElementById("guess").value.trim().toLowerCase();
-            let resultText = guess === palabra ? "¡Correcto!" : `Incorrecto. La palabra era: ${palabra}`;
-            document.getElementById("result").textContent = resultText;
-            fetchWord();
+        document.getElementById("comprobar").addEventListener("click", function() {
+            let guess = document.getElementById("adivina").value.trim().toLowerCase();
+            let resultadoTexto = guess === palabra ? "¡Correcto!" : "Incorrecto. La palabra era: " + palabra.toUpperCase();
+            document.getElementById("resultado").textContent = resultadoTexto;
+            palabraRandom();
         });
 
-        fetchWord();
+        palabraRandom();
     </script>
 </body>
 </html>

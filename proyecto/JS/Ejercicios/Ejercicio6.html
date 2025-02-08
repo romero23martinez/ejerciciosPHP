@@ -32,9 +32,9 @@
                     <th scope="row">1</th>
                     <td>Producto uno</td>
                     <td>
-                        <button class="btn btn-outline-dark">+</button>
+                        <button class="btn btn-outline-dark" onclick="aumentar(0)">+</button>
                         <input type="number" class="input-mini text-center" value="0">
-                        <button class="btn btn-outline-dark">-</button></td>
+                        <button class="btn btn-outline-dark" onclick="disminuir(0)">-</button></td>
                     <td><input type="number" class="precio" value="72"></td>
                     <td class="text-end">0 €</td>
                 </tr>
@@ -42,9 +42,9 @@
                     <th scope="row">2</th>
                     <td>Producto dos</td>
                     <td>
-                        <button class="btn btn-outline-dark">+</button>
+                        <button class="btn btn-outline-dark" onclick="aumentar(1)">+</button>
                         <input type="number" class="input-mini text-center" value="0">
-                        <button class="btn btn-outline-dark">-</button></td>
+                        <button class="btn btn-outline-dark" onclick="disminuir(1)">-</button></td>
                     <td><input type="number" class="precio" value="125"></td>
                     <td class="text-end">0 €</td>
                 </tr>
@@ -52,9 +52,9 @@
                     <th scope="row">3</th>
                     <td>Producto tres</td>
                     <td>
-                        <button class="btn btn-outline-dark">+</button>
+                        <button class="btn btn-outline-dark" onclick="aumentar(2)">+</button>
                         <input type="number" class="input-mini text-center" value="0">
-                        <button class="btn btn-outline-dark">-</button></td>
+                        <button class="btn btn-outline-dark" onclick="disminuir(2)">-</button></td>
                     <td><input type="number" class="precio" value="250"></td>
                     <td class="text-end">0 €</td>
                 </tr>
@@ -62,10 +62,10 @@
                     <th scope="row">4</th>
                     <td>Producto cuatro</td>
                     <td>
-                        <button class="btn btn-outline-dark">+</button>
+                        <button class="btn btn-outline-dark" onclick="aumentar(3)">+</button>
                         <input type="number" class="input-mini text-center" value="0">
-                        <button class="btn btn-outline-dark">-</button></td>
-                    <td><input type="number" class="text-end" value="300"></td>
+                        <button class="btn btn-outline-dark" onclick="disminuir(3)">-</button></td>
+                    <td><input type="number" class="precio" value="300"></td>
                     <td class="text-end">0 €</td>
                 </tr>
             </tbody>
@@ -79,12 +79,29 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous">
-    
-    const precio = document.querySelectorAll('.precio');
+        crossorigin="anonymous"></script>
+        
+    <script>
+
+        const precio = document.querySelectorAll('.precio');
         const cantidad = document.querySelectorAll('.input-mini.text-center');
         const total = document.querySelectorAll('.text-end');
         const precioTotal = document.getElementById('precioTotal');
+
+        function aumentar(index) {
+            let canti = cantidad[index];
+            canti.value = parseInt(canti.value) + 1;
+            actualizaPrecio();
+        }
+
+        function disminuir(index) {
+            let canti = cantidad[index];
+            if (canti.value > 0) {
+                canti.value = parseInt(canti.value) - 1;
+                actualizaPrecio();
+            }
+        }
+
 
        function actualizaPrecio(){
         let suma = 0;
@@ -94,9 +111,8 @@
           let subtotal = p * c;
           suma += subtotal;
           total[index].innerHTML = subtotal;
-          
         });
-        precioTotal.textContent = suma;
+        precioTotal.textContent = "Total = " + suma + "€";
     };
 
 
@@ -107,7 +123,8 @@
             precio.addEventListener('change', actualizaPrecio);
         });
         actualizaPrecio();
-    
+
+
     </script>
 </body>
 </html>

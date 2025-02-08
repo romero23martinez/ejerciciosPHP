@@ -75,11 +75,9 @@
         <input type="text" id="email" placeholder="Email">
         <input type="number" id="edad" placeholder="Edad">
         <button onclick="crearRegistro()">Crear</button>
-        <button onclick="eliminarRegistro()" id="eliminarRegistro">Eliminar</button>
-        <button onclick="actualizarRegistro()" id="btnActualizar">Actualizar</button>
+        <button onclick="actualizarRegistro()" id="btnActualizar" style="display: none;">Actualizar</button>
     </div>
 
-    <!-- Tabla para mostrar registros -->
     <table id="tablaRegistros">
         <thead>
             <tr>
@@ -91,12 +89,12 @@
             </tr>
         </thead>
         <tbody>
-            
+
         </tbody>
     </table>
 
     <script>
-        const API_URL = 'https://crudcrud.com/api/6df6317084294783a53778491669898f/usuarios';
+        const API_URL = 'https://crudcrud.com/api/5c7946f7a819446ab7bff1760df4877f/usuarios';
 
         async function obtenerRegistros() {
             try {
@@ -130,17 +128,15 @@
             const email = document.getElementById('email').value;
             const edad = document.getElementById('edad').value;
 
-            const usuario = {
-                nombre: nombre,
-                email: email,
-                edad: edad
-            };
-
             try {
                 const respuesta = await fetch(API_URL, {
                         method: 'POST',
-                        headers: {'Content-Type': 'application/json', },
-                    body: JSON.stringify(usuario),
+                        headers: {'Content-Type': 'application/json'},
+                        body:JSON.stringify({
+                            nombre: nombre,
+                            email: email,
+                            edad: edad
+                    })
                 });
                 if (respuesta.ok) {
                     obtenerRegistros(); 
@@ -153,15 +149,14 @@
             }
         }
 
-
         function editarRegistro(id) {
             const filas = document.querySelectorAll("#tablaRegistros tbody tr");
-                    let fila;
-                    filas.forEach( function(f) {
-                        if (f.children[0].textContent.trim() === id) {
-                            fila = f;
-                        }
-                    });
+            let fila;
+            filas.forEach( function(f) {
+                if (f.children[0].textContent.trim() === id) {
+                    fila = f;
+                }
+            });
 
             const nombre = fila.children[1].textContent;
             const email = fila.children[2].textContent;
@@ -182,19 +177,15 @@
             const email = document.getElementById('email').value;
             const edad = document.getElementById('edad').value;
 
-            const usuario = {
-                nombre: nombre,
-                email: email,
-                edad: edad
-            };
-
             try {
                 const respuesta = await fetch(`${API_URL}/${id}`, {
                     method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(usuario),
+                    headers: {'Content-Type': 'application/json'},
+                    body:JSON.stringify({
+                            nombre: nombre,
+                            email: email,
+                            edad: edad
+                    })
                 });
                 if (respuesta.ok) {
                     obtenerRegistros();
@@ -211,7 +202,7 @@
         async function eliminarRegistro(id) {
             try {
                 const respuesta = await fetch(`${API_URL}/${id}`, {
-                    method: 'DELETE',
+                    method: 'DELETE'
                 });
                 if (respuesta.ok) {
                     obtenerRegistros(); 

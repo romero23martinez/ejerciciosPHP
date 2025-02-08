@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARVEL</title>
+</head>
+<body>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.js"></script>
+
+    <script>
+        function md5(string){
+            return CryptoJS.MD5(string).toString(CryptoJS.enc.Hex);
+        }
+
+async function obtenerPersonajes() {
+    const publicKey = 'df8b12dbfd7c35f06508d3ed601e9f4f';
+    const privateKey = '09ef11f51fb7da7105e313599293479ee9a9fc33'; 
+    const timestamp = new Date().getTime(); // Timestamp actual
+    const hash = md5(timestamp + privateKey + publicKey); // Genera el hash
+
+    const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
+
+    try {
+        // Hacemos la petición GET a la API de Marvel
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data);
+        // Verificar si la respuesta es correcta
+        if (response.ok) {
+            console.log("Personajes de Marvel:", data.data.results);
+            // Puedes hacer lo que quieras con los datos aquí.
+        } else {
+            console.error("Error en la API de Marvel:", data);
+        }
+    } catch (error) {
+        console.error("Error al obtener los datos:", error);
+    }
+}
+        obtenerPersonajes();
+    </script>
+</body>
+</html>
