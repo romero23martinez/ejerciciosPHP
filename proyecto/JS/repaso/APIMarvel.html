@@ -17,10 +17,10 @@
 async function obtenerPersonajes() {
     const publicKey = 'df8b12dbfd7c35f06508d3ed601e9f4f';
     const privateKey = '09ef11f51fb7da7105e313599293479ee9a9fc33'; 
-    const timestamp = new Date().getTime(); // Timestamp actual
-    const hash = md5(timestamp + privateKey + publicKey); // Genera el hash
+    const timestamp = new Date().getTime();
+    const hash = md5(timestamp + privateKey + publicKey);
 
-    const url = `http://gateway.marvel.com/v1/public/comics?apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
+    const url = `http://gateway.marvel.com/docs/public?apikey=${publicKey}&ts=${timestamp}&hash=${hash}`;
 
     try {
         // Hacemos la petición GET a la API de Marvel
