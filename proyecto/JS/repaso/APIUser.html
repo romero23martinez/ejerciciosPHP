@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random User Generator</title>
+</head>
+<body>
+    <h1>Usuarios</h1>
+    <button onclick="obtenerUsuarios()">Mostrar Usuarios</button>
+    <table border="1">
+        <thead>
+                <tr>
+                    <th id="foto">Foto</th>
+                    <th id="nombre">Nombre</th>
+                    <th id="email">Correo</th>
+                    <th id="pais">Pais</th>
+                    <th id="edad">Edad</th>
+                </tr>
+        </thead>
+    
+        <tbody id="body"></tbody>
+    </table>
+
+    <script>
+        const API = "https://randomuser.me/api/?results=5";
+        
+        async function obtenerUsuarios(){
+
+            const respuesta = await fetch(API);
+            const data = await respuesta.json();
+            console.log(data);
+
+            document.getElementById("body").innerHTML = "";
+           
+            data.results.forEach(celda => {
+               document.getElementById("body").innerHTML += `
+                <tr>
+                    <td><img src="${celda.picture.thumbnail}" alt="Foto"></td>         
+                    <td>${celda.name.first}</td> 
+                    <td>${celda.email}</td> 
+                    <td>${celda.location.country}</td> 
+                    <td>${celda.dob.age}</td> 
+
+                </tr>`;
+            });
+        }
+
+    </script>
+</body>
+</html>
