@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meteo</title>
+</head>
+<body>
+    <h1>El clima en tu ciudad</h1>
+
+    <button onclick="obtenerClima()">Recargar</button>
+    <table border="1">
+
+        <thead>
+            <tr>
+                <th>Hora</th>
+                <th>Temperatura</th>
+                <th>Humedad</th>
+                <th>Velocidad viento</th>
+            </tr>
+        </thead>
+        <tbody id="body"></tbody>
+    </table>
+
+    <script>
+       
+        const URL = "https://api.open-meteo.com/v1/forecast?latitude=41.6561&longitude=-0.8773&hourly=temperature_2m&timezone=Europe%2FBerlin";
+
+        async function obtenerClima(ciudad) {
+            const respuesta = await fetch(URL);
+            const datos = await respuesta.json();
+
+            document.getElementById("body").innerHTML = "";
+            datos.forEach(celda => {
+                document.getElementById("body").innerHTML += `
+                    <tr>
+                        <td>${celda.hourly.time}</td>
+                        <td>${celda.temperature_2m} ºC</td>
+
+                    </tr>
+                `;
+            });
+
+
+        }
+        obtenerClima()
+    </script>
+</body>
+</html>

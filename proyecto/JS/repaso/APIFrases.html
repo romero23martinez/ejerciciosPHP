@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frases</title>
+    <style>
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: left;
+        }
+        button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Frases de tus series y películas</h1>
+    
+    <button onclick="obtenerFrase()">Recargar</button>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Frase</th>
+                <th>Autor</th>
+            </tr>
+        </thead>
+        <tbody id="body"></tbody>
+
+    </table>
+
+    <script>
+
+        const URL = "https://api.breakingbadquotes.xyz/v1/quotes/5";
+
+        async function obtenerFrase(){
+
+            const respuesta = await fetch(URL);
+            const datos = await respuesta.json();
+
+            document.getElementById("body").innerHTML= "";
+
+            datos.forEach(celda => {
+                document.getElementById("body").innerHTML += `
+                    <tr>
+                        <td>${celda.quote}</td>
+                        <td>${celda.author}</td>
+                    </tr>
+                `;
+            });
+
+        }
+        obtenerFrase();
+
+    </script>
+</body>
+</html>
