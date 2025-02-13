@@ -130,7 +130,7 @@
         celda3.appendChild(textCelda3);
 
         //Subo a la API los resultados
-        await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados",
+        await fetch("https://67ae28379e85da2f020ca294.mockapi.io/dados",
         {
             method: 'POST',
             headers: {
@@ -151,7 +151,7 @@
 
     async function verResultados() {
         console.log("inicio de la  peticion");
-        let respuesta = await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados");
+        let respuesta = await fetch("https://67ae28379e85da2f020ca294.mockapi.io/dados");
         let datos = await respuesta.json();
         console.log("Datos obtenidos", datos);
         
@@ -163,11 +163,11 @@
     }
     
     async function borrar(){
-        let respuestaBorrar = await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados");
+        let respuestaBorrar = await fetch("https://67ae28379e85da2f020ca294.mockapi.io/dados");
         let datosBorrar = await respuestaBorrar.json();
 
         for (let elemento of datosBorrar) {
-            await fetch("https://crudcrud.com/api/99da9380d0f14167926ed2cb57f57b34/resultados/" + elemento._id,
+            await fetch("https://67ae28379e85da2f020ca294.mockapi.io/dados/" + elemento._id,
             {method: 'DELETE'});
         }
         verResultados();
