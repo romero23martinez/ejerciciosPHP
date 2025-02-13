@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chistes</title>
+</head>
+<body>
+    <h1>¿Te cuento un chiste?</h1>
+    <p id="chiste1"></p>
+    <p id="chiste2"></p>
+    <script>
+        const api = "https://v2.jokeapi.dev/joke/Any";
+
+        async function contarChiste() {
+            const respuesta = await fetch(api);
+            const datos = await respuesta.json();
+
+            document.getElementById("chiste1").innerHTML ="";
+            document.getElementById("chiste2").innerHTML = "";
+
+            if (datos.type === "twopart") {
+                document.getElementById("chiste1").innerHTML = datos.setup;
+                document.getElementById("chiste2").innerHTML = datos.delivery;
+            } else {
+                document.getElementById("chiste1").innerHTML = datos.joke;
+            };
+            console.log(datos);
+
+    }
+
+        contarChiste();
+    </script>
+    
+</body>
+</html>
