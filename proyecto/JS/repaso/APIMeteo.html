@@ -10,7 +10,6 @@
 
     <button onclick="obtenerClima()">Recargar</button>
     <table border="1">
-
         <thead>
             <tr>
                 <th>Hora</th>
@@ -24,26 +23,43 @@
 
     <script>
        
-        const URL = "https://api.open-meteo.com/v1/forecast?latitude=41.6561&longitude=-0.8773&hourly=temperature_2m&timezone=Europe%2FBerlin";
+        const URL = "https://api.open-meteo.com/v1/forecast?latitude=41.6561&longitude=-0.8773&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=Europe%2FBerlin";
 
         async function obtenerClima(ciudad) {
             const respuesta = await fetch(URL);
             const datos = await respuesta.json();
 
             document.getElementById("body").innerHTML = "";
-            datos.forEach(celda => {
-                document.getElementById("body").innerHTML += `
-                    <tr>
-                        <td>${celda.hourly.time}</td>
-                        <td>${celda.temperature_2m} ºC</td>
-
-                    </tr>
-                `;
-            });
 
 
+           // const horas = datos.hourly.time.at(-1);
+           // const temperatura = datos.hourly.temperature_2m.at(-1);
+           // document.getElementById("body").innerHTML = `
+           // <tr>
+          //      <td>${horas}</td>
+           //     <td>${temperatura}</td>
+          //  </tr>
+          //  `;
+
+          const horas = datos.hourly.time.reverse();
+          const temperatura = datos.hourly.temperature_2m.reverse();
+          const humedad = datos.hourly.relative_humidity_2m.reverse();
+          const viento = datos.hourly.wind_speed_10m.reverse();
+
+          for (i = 0; i < horas.length; i++){
+            document.getElementById("body").innerHTML += `
+            <tr>
+                <td>${horas[i]}</td>
+                <td>${temperatura[i]}</td>
+                <td>${humedad[i]}</td>
+                <td>${viento[i]}</td>
+            </tr>
+            `;
+          }
+            
         }
-        obtenerClima()
+       
+        obtenerClima();
     </script>
 </body>
 </html>
