@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <style>
+        body {
+    background-color: lightblue;
+    color: black;
+    font-family: Arial, sans-serif;
+}
+
+h1 {
+    color: white;
+    text-align: center;
+}
+
+button {
+    background-color: navy;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+}
+    </style>
+</head>
+<body class="fondo">
+    <h1 id="h1">Enviar un post</h1>
+    <form id="formulario">
+        <input id="titulo" placeholder="Titulo">
+        <input id="contenido" placeholder="Contenido">
+        <button type="submit">Enviar</button>
+        
+    </form>
+
+    <h2>Respuesta del servidor:</h2>
+    <h3 id="title"></h3>
+    <p id="body"></p>
+
+    <script>
+
+        document.getElementById("h1").addEventListener("mouseover", function(){
+            this.style.color = "black";
+        })
+
+        document.getElementById("title").addEventListener("mouseover", function(){
+            this.style.color = "red";
+        })
+
+        document.body.addEventListener("click", function(){
+            document.body.style.backgroundColor = "red";
+        })
+
+        const URL = "https://jsonplaceholder.typicode.com/posts";
+
+        document.getElementById("formulario").addEventListener("submit", async function(event){
+            event.preventDefault();
+        
+        const titulo = document.getElementById("titulo").value;
+        const contenido = document.getElementById("contenido").value;
+
+        const respuesta = await fetch(URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body:JSON.stringify({
+                userId: 1111,
+                title: titulo,
+                body: contenido
+            })
+        });
+
+        const datos = await respuesta.json();
+
+        document.getElementById("title").innerHTML = datos.title;
+        document.getElementById("body").innerHTML = datos.body;
+    });
+        
+
+
+    </script>
+    
+</body>
+</html>

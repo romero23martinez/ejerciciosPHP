@@ -8,6 +8,8 @@
 <body>
     <h1>El clima en tu ciudad</h1>
 
+    <input id="ciudad" placeholder="Tu ciudad">
+    <button onclick="buscarCiudad()">Buscar</button>
     <button onclick="obtenerClima()">Recargar</button>
     <table border="1">
         <thead>
@@ -22,13 +24,29 @@
     </table>
 
     <script>
-       
-        const URL = "https://api.open-meteo.com/v1/forecast?latitude=41.6561&longitude=-0.8773&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=Europe%2FBerlin";
+
+        let latitude = 0 ;
+        let longitude = 0 ;
+
+        async function buscarCiudad() {
+            let ciudad = document.getElementById("ciudad").value;
+            let geo = `https://geocoding-api.open-meteo.com/v1/search?name=${ciudad}&count=1&language=es&format=json`;
+
+            const respuesta = await fetch(geo);
+            const datos = await respuesta.json();
+            console.log(datos);
+            latitude = datos.results[0].latitude;
+            longitude = datos.results[0].longitude;
+            obtenerClima();
+            
+        }
+
+        
 
         async function obtenerClima(ciudad) {
-            const respuesta = await fetch(URL);
+            const respuesta = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m&timezone=Europe%2FBerlin`);
             const datos = await respuesta.json();
-
+            console.log(datos);
             document.getElementById("body").innerHTML = "";
 
 
