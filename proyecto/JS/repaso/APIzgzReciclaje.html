@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIZaragoza</title>
+</head>
+<body>
+
+    <h1>Listado puntos de recogida de aceite</h1>
+
+    <input id="ubicacion" placeholder="Calle">
+    <button onclick="buscar()">Buscar</button>
+    <ol>
+        <li></li>
+    </ol>
+
+    <table border="1" id="registros">
+        <thead>
+            <tr>
+                <td>Nombre</td>
+                <td>Ubicacion</td>
+            </tr>
+        </thead>
+
+        <tbody>
+        
+        </tbody>
+    </table>
+
+
+
+    <script>
+        const URL = "https://www.zaragoza.es/sede/servicio/equipamiento/list.json?srsname=utm30n&start=0&rows=2000&fl=title,calle,tel&q=category.id%3D%3D1800";
+
+        async function obtener() {
+            const respuesta = await fetch(URL);
+            const datos = await respuesta.json();
+
+            console.log(datos);
+            const tbody = document.querySelector('#registros tbody');
+            tbody.innerHTML = "";
+
+            datos.result.forEach(celda => {
+                tbody.innerHTML += ` 
+                    <tr>
+                        <td>${celda.title}</td>
+                        <td>${celda.calle}</td>
+                    </tr>    
+                `;
+            });
+
+
+        }
+
+        async function buscar(){
+            
+            let ubicacion = document.getElementById("ubicacion").value.toLowerCase();
+            const respuesta = await fetch(URL);
+            const datos = await respuesta.json();
+
+            const tbody = document.querySelector('#registros tbody');
+            tbody.innerHTML = "";
+
+            const busqueda = datos.result.filter(celda => celda.calle && celda.calle.toLowerCase().includes(ubicacion));
+
+            busqueda.forEach(celda => {
+                tbody.innerHTML += ` 
+                    <tr>
+                        <td>${celda.title}</td>
+                        <td>${celda.calle}</td>
+                    </tr>    
+                `;
+            });
+        }
+
+        obtener();
+    </script>
+    
+</body>
+</html>
