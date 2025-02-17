@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baños</title>
+</head>
+<body>
+    <h1>Baños Públicos</h1>
+
+    <table border="1" id="tabla">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Ubicación</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+
+    </table>
+
+    <script>
+        const URL = "https://www.zaragoza.es/sede/servicio/equipamiento/list.json?srsname=utm30n&start=0&rows=2000&fl=title,calle,tel&q=category.id%3D%3D1060";
+
+        async function obtener() {
+            const respuesta = await fetch(URL);
+            const datos = await respuesta.json();
+
+            document.querySelector('#tabla tbody').innerHTML = "";
+
+            datos.result.forEach(celda => {
+                document.querySelector('#tabla tbody').innerHTML += `
+                <tr>
+                    <td>${celda.title}</td>
+                    <td>${celda.calle}</td>
+                </tr>
+                `;
+            });
+        }
+        obtener();
+    </script>
+</body>
+</html>

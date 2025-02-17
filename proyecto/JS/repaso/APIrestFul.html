@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tareas</title>
+</head>
+<body>
+    <h1>API de Tareas</h1>
+
+    <form>
+        <input type="text" id="nuevaTarea" placeholder="Introduce tarea">
+        <button type="submit" onclick="guardarTarea()">Guardar</button>
+    </form>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Tarea</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody id="body"> </tbody>
+    </table>
+
+    <script>
+        const API = "https://jsonplaceholder.typicode.com/todos/";
+
+        async function obtener() {
+            const respuesta = await fetch(API);
+            const datos = await respuesta.json();
+
+            document.getElementById("body").innerHTML = "";
+
+            datos.forEach(celda => {
+                document.getElementById("body").innerHTML += `
+                    <tr>
+                        <td>${celda.title}</td>
+                        <td>${celda.completed}</td>
+                    </tr>
+                `;
+            });
+        }
+
+        function guardarTarea(){
+
+        }
+
+
+
+        obtener();
+    </script>
+</body>
+</html>
