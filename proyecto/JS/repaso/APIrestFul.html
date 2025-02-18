@@ -8,9 +8,13 @@
 <body>
     <h1>API de Tareas</h1>
 
-    <form>
-        <input type="text" id="nuevaTarea" placeholder="Introduce tarea">
-        <button type="submit" onclick="guardarTarea()">Guardar</button>
+    <form id="formulario">
+        <input type="text" id="titulo" placeholder="Nombre Tarea">
+        <input type="radio" id="completada" name="tarea" value="completada">
+        <label>Completada</label>
+        <input type="radio" id="pendiente" name="tarea" value="pendiente">
+        <label>Pendiente</label>
+        <button type="submit">Guardar</button>
     </form>
     
     <table border="1">
@@ -26,6 +30,7 @@
     <script>
         const API = "https://jsonplaceholder.typicode.com/todos/";
 
+            //VER TAREAS
         async function obtener() {
             const respuesta = await fetch(API);
             const datos = await respuesta.json();
@@ -36,17 +41,81 @@
                 document.getElementById("body").innerHTML += `
                     <tr>
                         <td>${celda.title}</td>
-                        <td>${celda.completed}</td>
+                        <td>${celda.completed ? "completada": "pendiente"}</td>
+                        <td>
+                            <button onclick="modificar('${celda.id}')">Editar</button>
+                            <button onclick="eliminar('${celda.id}')">Eliminar</button>
+                        </td>
                     </tr>
                 `;
             });
         }
+                //CREAR TAREA
+        document.getElementById("formulario").addEventListener("submit", async function registrar(event) {
+            event.preventDefault();
 
-        function guardarTarea(){
+            const nombreTarea = document.getElementById("titulo").value;
+
+            let estado;
+            document.getElementsByName("tarea").forEach((radio) => {
+                if (radio.checked) estado = radio.value ==="completada";
+            });
+
+            const envio = await fetch(API, {
+                method: 'POST',
+                headers:{'content-type':'application/json'},
+                body:JSON.stringify({
+                    userId: 1111,
+                    title: nombreTarea,
+                    completed: estado
+                })
+            });
+
+            const respuesta = await envio.json();
+
+            
+            document.getElementById("body").innerHTML += `
+                    <tr>
+                        <td>${respuesta.title}</td>
+                        <td>${respuesta.completed ? "Completada" : "Pendiente"}</td>
+                        <td>
+                            <button onclick="modificar(${respuesta.id})">Editar</button>
+                            <button onclick="eliminar(${respuesta.id})">Eliminar</button>
+                        </td>
+                    </tr>
+                `;
+
+            document.getElementById("titulo").value = "";
+            document.getElementsByName("tarea").forEach(radio => radio.checked = false);
+            obtener();
+        });
+
+            //MODIFICAR TAREA
+        async function modificar(id) {
+            const nuevoTitulo = prompt("Introduce el nuevo título:");
+
+            if (!nuevoTitulo) return;
+
+            const respuesta = await fetch(`${API}/${id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 
+                    title: nuevoTitulo,
+                    completed: true })
+            });
+            
+            obtener();
 
         }
 
+            //ELIMINAR TAREA
+        async function eliminar(id) {
+            const respuesta = await fetch(`${API}/${id}`,{method: 'DELETE'});
+            obtener();
 
+        }
 
         obtener();
     </script>
