@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loteria</title>
+</head>
+<body>
+    <button onclick="enviar()">Dale a la palanca CRONK</button>
+    
+    <table border="1" id="tablaNumeros">
+        <thead>
+            <th>Resultado</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+    <form id="formulario">
+        <input type="text" id="jugador" placeholder="Participante">
+        <button type="submit">Añadir</button>
+    </form>
+    <table border="1" id="tablaJugadores">
+        <thead>
+            <th>Participantes</th>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const numeros = "https://67ae28379e85da2f020ca294.mockapi.io/dados";
+
+        function loteria(){
+            return(Math.floor(Math.random()*50) + 1);
+
+        }
+        async function enviar() {
+            
+            let numero = loteria();
+            console.log(numero);
+            
+            await fetch(numeros, {
+                method:'POST',
+                headers:{'content-type':'application/json'},
+                body:JSON.stringify({
+                    numero: numero
+                })
+
+            });
+            obtener();
+        }
+
+        async function obtener() {
+            const respuesta = await fetch(numeros);
+            const datos = await respuesta.json();
+
+            document.querySelector('#tablaNumeros tbody').innerHTML = "";
+
+            datos.forEach(celda => {
+                document.querySelector('#tablaNumeros tbody').innerHTML += `
+                    <tr>
+                        <td>${celda.numero}</td>
+                    </tr>
+                `;
+            });
+
+        }
+
+       // function imagen(valor){
+       //     return "./loteria/" + valor +".png"
+       // }
+
+       const jugadores = "https://67ae28379e85da2f020ca294.mockapi.io/crud";
+
+       document.getElementById("formulario").addEventListener("submit", async function(event){
+            event.preventDefault();
+            
+        let nombre = document.getElementById("jugador").value;
+
+            await fetch(jugadores, {
+                method:'POST',
+                headers:{'content-type':'application/json'},
+                body:JSON.stringify({
+                    nombre: nombre
+                })
+
+            });
+            document.getElementById("jugador").value = "";
+            verJugadores();
+       }); 
+
+  
+        
+
+        async function verJugadores() {
+            const respuesta = await fetch(jugadores);
+            const datos = await respuesta.json();
+
+            document.querySelector('#tablaJugadores tbody').innerHTML = "";
+
+            datos.forEach(celda => {
+                document.querySelector('#tablaJugadores tbody').innerHTML += `
+                    <tr>
+                        <td>${celda.nombre}</td>
+                    </tr>
+                `;
+            });
+
+        }
+        obtener();
+        verJugadores();
+    </script>
+</body>
+</html>
