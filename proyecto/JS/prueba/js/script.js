@@ -22,6 +22,7 @@ async function createProduct() {
         body: JSON.stringify(product)
     });
 
+
     document.getElementById("nombre").value = "";
     document.getElementById("descripcion").value = "";
     document.getElementById("cantidad").value = "";
@@ -31,9 +32,16 @@ async function createProduct() {
 async function getProducts() {
     const response = await fetch(apiUrl);
     const datos = await response.json();
-
+    document.getElementById("body").innerHTML = "";
+    
     datos.forEach(producto => {
-        console.log(`Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}`);
+        document.getElementById("body").innerHTML += `
+        <tr>
+         <td>${producto.nombre}</td>
+         <td>${producto.descripcion}</td>
+         <td>${producto.cantidad}</td>
+         </tr>
+        `;
     });
 
 }

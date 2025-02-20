@@ -100,7 +100,7 @@ button.eliminar:hover {
     </style>
 </head>
 <body>
-    <button onclick="enviar()">Dale a la palanca CRONK</button>
+    <button onclick="enviar()">Tira de la palanca CRONK</button>
     <h2>El número es: </h2>
     <h1 id="ultimoNumero"> </h1>
 
@@ -125,11 +125,27 @@ button.eliminar:hover {
 
     <script>
         const numeros = "https://67ae28379e85da2f020ca294.mockapi.io/dados";
-
-        function loteria(){
-            return(Math.floor(Math.random()*50) + 1);
-
+/*
+        let array = [];
+        for (i = 0; i < 10; i++){
+            array[i] = i + 1;
         }
+
+        let indice;
+*/
+        function loteria(){
+           /* indice = Math.floor(Math.random()*array.length);
+            numero = array[indice];
+            
+            array.slice(indice, 1);
+            console.log(array);
+            return numero;
+            */
+            
+            return(Math.floor(Math.random()*90) + 1);
+            
+        }
+
         async function enviar() {
             
             let numero = loteria();
