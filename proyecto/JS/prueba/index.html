@@ -7,10 +7,11 @@
 </head>
 <body>
         <input type="text" id="nombre" placeholder="Nombre Producto" required>
-        <input type="number" id="precio" placeholder="Precio" min="0" required>
-        <button onclick="createProduct(producto)">Crear producto</button>
+        <input type="text" id="descripcion" placeholder="Describe el Producto" required>
+        <input type="number" id="cantidad" placeholder="cantidad" min="1" required>
+        <button onclick="createProduct()">Crear producto</button>
+        <button onclick="getProducts()">Mostrar consola</button>
 
-    <button onclick="getProducts()">Mostrar consola</button>
     <script src="./js/script.js"></script>
 </body>
 </html>

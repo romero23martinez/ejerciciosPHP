@@ -1,32 +1,39 @@
 
-const apiurl = 'https://crudcrud.com/api/39e00067f59b4a6fae2a126d72130085/products';
+const apiUrl = 'https://crudcrud.com/api/39e00067f59b4a6fae2a126d72130085/products';
 
 
-async function createProduct(producto) {
+async function createProduct() {
 
-    const nombre =document.getElementById("nombre").value;
-    const precio =document.getElementById("precio").value;
+    const nombre = document.getElementById("nombre").value;
+    const descripcion = document.getElementById("descripcion").value;
+    const cantidad = document.getElementById("cantidad").value;
 
-    const producto ={nombre, precio};
-
-    const response = await fetch(apiurl,{
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body:JSON.stringify(producto)
-    });
-
-    if (!response.ok) {
-        alert("Error al crear producto");
+    if (!nombre || !descripcion || !cantidad || cantidad <= 0) {
+        alert("Ingresa datos validos");
+        return;
     }
 
-    console.log(producto);
+    const product ={ nombre, descripcion, cantidad };
+
+
+    const response = await fetch(apiUrl,{
+        method: 'POST',
+        headers: { 'Content-Type':'application/json' },
+        body: JSON.stringify(product)
+    });
 
     document.getElementById("nombre").value = "";
-    document.getElementById("precio").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("cantidad").value = "";
     return response.json();
 }
 
 async function getProducts() {
-    const response = await fetch(apiurl);
-    return response.json();
+    const response = await fetch(apiUrl);
+    const datos = await response.json();
+
+    datos.forEach(producto => {
+        console.log(`Nombre: ${producto.nombre}, Cantidad: ${producto.cantidad}`);
+    });
+
 }
