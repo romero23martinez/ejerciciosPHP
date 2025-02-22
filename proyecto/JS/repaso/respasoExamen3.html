@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabado 2</title>
+</head>
+<body>
+    
+    <h1>CRUD</h1>
+    <form onsubmit="updateProduct()">
+        <input id="productIdU" placeholder="id">
+        <input type="text" id="nombreU" placeholder="nombre">
+        <input type="number" id="cantidadU" placeholder="cantidad">
+        <input type="submit" value="Modificar">
+    </form>
+
+    <form onsubmit="createProduct()">
+        <input type="text" id="nombreC" placeholder="nombre" required>
+        <input type="number" id="cantidadC" placeholder="cantidad" required>
+        <input type="submit" value="Crear">
+    </form>
+    <form onsubmit="deleteProduct()">
+        <input id="productId" placeholder="id">
+        <input type="submit" value="Eliminar">
+    </form>
+    <button onclick="getProducts()">Ver Productos</button>
+
+
+
+    <script src="./scripts/script3.js"></script>
+</body>
+</html>
