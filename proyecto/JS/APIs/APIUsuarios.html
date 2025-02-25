@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista Usuarios</title>
+</head>
+<body>
+
+    <input type="text" id="id" placeholder="ID Usuario">
+    <input type="text" id="nombre" placeholder="Nuevo nombre">
+    <button onclick="actualizar()">Actualizar</button>
+
+    <h1>Lista de Usuarios</h1>
+    <ul id="lista"></ul>
+
+    <script>
+        const API = "https://jsonplaceholder.typicode.com/users";
+
+        async function verUsuarios() {
+
+            const respuesta = await fetch(API);
+            const datos = await respuesta.json();
+
+            const lista = document.getElementById("lista");
+
+            lista.innerHTML = "";
+
+            datos.forEach(fila => {
+                const li = document.createElement("li");
+                li.innerHTML = `
+                ${fila.name} - ${fila.username}
+                <button onclick="eliminar(${fila.id})">❌</button>
+                `;
+                lista.appendChild(li);
+            });
+        }
+
+        async function actualizar() {
+            const id = document.getElementById("id").value;
+            const name = document.getElementById("nombre").value;
+            
+
+            const respuesta = await fetch(`${API}/${id}`, {
+                method: 'PUT',
+                headers: {'Content-type' : 'application/json'},
+                body: JSON.stringify({ name })
+            });
+
+            document.getElementById("id").value = "";
+            document.getElementById("nombre").value = "";
+            verUsuarios();
+        }
+
+        async function eliminar(id) {
+            const respuesta = await fetch(`${API}/${id}`, {
+                method: 'DELETE'
+            });
+            verUsuarios();
+        }
+
+
+        verUsuarios();
+    </script>
+</body>
+</html>
