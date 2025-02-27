@@ -19,6 +19,9 @@ function cambiar(imagen){
 document.querySelector("#mensaje").innerText = "nuevo texto";
 
 document.querySelectorAll(".btn").forEach(boton =>{
+    boton.addEventListener("click", () => {
     boton.style.backgroundColor = "orange";
-    boton.innerText = "botonnn";
+    boton.textContent = "puta";
+    })
 });
+
